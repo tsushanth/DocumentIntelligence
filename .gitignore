@@ -117,3 +117,4 @@ APIKeys.plist
 .vscode/
 .idea/
 *.orig
+.env
