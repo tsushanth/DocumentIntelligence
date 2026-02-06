@@ -1,0 +1,57 @@
+name: InvoiceFlowAI
+options:
+  bundleIdPrefix: com.documentintelligence
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: "7RS696YC75"
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.9"
+
+packages:
+  DocumentCore:
+    path: ../../DocumentCore
+
+targets:
+  InvoiceFlowAI:
+    type: application
+    platform: iOS
+    sources:
+      - InvoiceFlowAI
+    dependencies:
+      - package: DocumentCore
+        product: DocumentCore
+    settings:
+      base:
+        INFOPLIST_FILE: InvoiceFlowAI/Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: InvoiceFlowAI/Resources/InvoiceFlowAI.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: com.documentintelligence.invoiceflow
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    info:
+      path: InvoiceFlowAI/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: InvoiceFlow Pro
+        CFBundleName: InvoiceFlowAI
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "2"
+        CFBundleIconName: AppIcon
+        UILaunchScreen:
+          UIColorName: ""
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSCameraUsageDescription: "InvoiceFlow AI needs camera access to scan receipts"
+        NSPhotoLibraryUsageDescription: "InvoiceFlow AI needs photo library access to import receipts"
+        NSSpeechRecognitionUsageDescription: "InvoiceFlow AI uses speech recognition for voice-to-invoice feature"
+        NSMicrophoneUsageDescription: "InvoiceFlow AI needs microphone access for voice-to-invoice feature"
+        ITSAppUsesNonExemptEncryption: false
