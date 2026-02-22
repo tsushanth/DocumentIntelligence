@@ -1,0 +1,59 @@
+name: DocuScanAI
+options:
+  bundleIdPrefix: com.documentintelligence
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "5.9"
+
+packages:
+  DocumentCore:
+    path: ../../DocumentCore
+  RevenueCat:
+    url: https://github.com/RevenueCat/purchases-ios.git
+    from: 5.0.0
+
+targets:
+  DocuScanAI:
+    type: application
+    platform: iOS
+    sources:
+      - DocuScanAI
+    dependencies:
+      - package: DocumentCore
+        product: DocumentCore
+      - package: RevenueCat
+        product: RevenueCat
+    settings:
+      base:
+        INFOPLIST_FILE: DocuScanAI/Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.documentintelligence.docuscan
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "3"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    info:
+      path: DocuScanAI/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: DocuScan AI
+        CFBundleName: DocuScanAI
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "3"
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+          UIImageName: ""
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSCameraUsageDescription: "DocuScan AI needs camera access to scan documents"
+        NSPhotoLibraryUsageDescription: "DocuScan AI needs photo library access to import documents"
+        NSUserTrackingUsageDescription: "This allows us to provide you with a better, personalized experience and measure the effectiveness of our ads."
+        ITSAppUsesNonExemptEncryption: false

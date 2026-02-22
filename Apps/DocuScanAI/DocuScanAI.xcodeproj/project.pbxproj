@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04F3C9D0D341CE9969E91FD6 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB1F1036332153FADDEC6AD /* PaywallView.swift */; };
+		241A4DC645F8539FB6BEEE38 /* FolderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A45162C66F2BB2B2CD152B /* FolderDetailView.swift */; };
+		35EBDBDB8BBE340998675BF9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F854FA10DDF069DA356BA /* HomeViewModel.swift */; };
+		3A1F53991206BB3A0DEAF534 /* ProFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9AC8A65E5ED077C96CEDF /* ProFeature.swift */; };
+		42418BA32AA84A642A378E2B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C045C255475AA69D0AC84 /* ContentView.swift */; };
+		52CCAA3B792696B23D29A8E7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B959BC2F9AE4C2F6796317C4 /* PrivacyInfo.xcprivacy */; };
+		541C4CE735687299BAA5746B /* DocumentDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F34F06B148E8F535A016BD /* DocumentDetailViewModel.swift */; };
+		594F3819E5997B7FEA3C23CF /* WatermarkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F2354A10C3F8DBD3BBE66 /* WatermarkService.swift */; };
+		5B64C8E0A008DFA280A74647 /* AIInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55953F71D924DFA2B5DEC74F /* AIInsightsView.swift */; };
+		65C2EA2210D9B2160FB18B2D /* AIInsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434302954DA24F4E2A8259E7 /* AIInsightsViewModel.swift */; };
+		71C766FB2B2F6929C52915C5 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15944AC794C45E87992337 /* SubscriptionManager.swift */; };
+		7C55265826754789A1C1963B /* DocumentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE324A81767A2E6603A0F16 /* DocumentDetailView.swift */; };
+		8F743CDFB4F294A897D2CCA5 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = F1468559576F91D4EBFD48BC /* RevenueCat */; };
+		9020812AE3E627A7BFAD1FF3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DCB4EC36CE11465D0F4204 /* SettingsView.swift */; };
+		9FA30F9994AB6F82F7BFEE6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4DC9ADE57233DF2BCA8ECA9 /* Assets.xcassets */; };
+		B04176B4D7973FF9C246847D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF35F7B93842212A9FB6F40 /* HomeView.swift */; };
+		B1BA3B4678AA030E1898E7BF /* DocuScanAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDB85975F54C62EF9C22B92 /* DocuScanAIApp.swift */; };
+		D5A97771D7C41CD604E5FD7A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED58D05B19F9F70A7D1993CE /* Models.swift */; };
+		D76BEB74FF133CC4E1844119 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7795B9EE8E41EF32126B99 /* ScannerView.swift */; };
+		E1B48EC431B87B9B8800C1A9 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1B2D69C94C24A2E36EA8D /* ScannerViewModel.swift */; };
+		F271C1A0AF0F142EBBEE5B44 /* DocumentCore in Frameworks */ = {isa = PBXBuildFile; productRef = 827A6E14EE95876D3D9E9746 /* DocumentCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1B7795B9EE8E41EF32126B99 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		2A15944AC794C45E87992337 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
+		2CE324A81767A2E6603A0F16 /* DocumentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailView.swift; sourceTree = "<group>"; };
+		38A45162C66F2BB2B2CD152B /* FolderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDetailView.swift; sourceTree = "<group>"; };
+		434302954DA24F4E2A8259E7 /* AIInsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIInsightsViewModel.swift; sourceTree = "<group>"; };
+		55953F71D924DFA2B5DEC74F /* AIInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIInsightsView.swift; sourceTree = "<group>"; };
+		5D905DF9261287EAC2FD0770 /* DocumentCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DocumentCore; path = ../../DocumentCore; sourceTree = SOURCE_ROOT; };
+		6B0F854FA10DDF069DA356BA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7CE1B2D69C94C24A2E36EA8D /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
+		81DCB4EC36CE11465D0F4204 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		974352BD9D9D50CDB8638B2D /* DocuScanAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocuScanAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97E9AC8A65E5ED077C96CEDF /* ProFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProFeature.swift; sourceTree = "<group>"; };
+		99F34F06B148E8F535A016BD /* DocumentDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailViewModel.swift; sourceTree = "<group>"; };
+		9CF35F7B93842212A9FB6F40 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A15C045C255475AA69D0AC84 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC4F2354A10C3F8DBD3BBE66 /* WatermarkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatermarkService.swift; sourceTree = "<group>"; };
+		B959BC2F9AE4C2F6796317C4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		D4DC9ADE57233DF2BCA8ECA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED58D05B19F9F70A7D1993CE /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		F5AC6E980EE5226614E94345 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FDB1F1036332153FADDEC6AD /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		FDDB85975F54C62EF9C22B92 /* DocuScanAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocuScanAIApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADEBC8ADA1893250EC64EA10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F271C1A0AF0F142EBBEE5B44 /* DocumentCore in Frameworks */,
+				8F743CDFB4F294A897D2CCA5 /* RevenueCat in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B13AA75ED97B480E2865D0F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AC4F2354A10C3F8DBD3BBE66 /* WatermarkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4F2D4562DB0ECC8E699CFA5F /* DocuScanAI */ = {
+			isa = PBXGroup;
+			children = (
+				D918C75978FC89A556E8EE66 /* App */,
+				5C7846076A1D20B65A3C930A /* Resources */,
+				0B13AA75ED97B480E2865D0F /* Services */,
+				785E87AD3F00A43CB028BC6B /* Subscription */,
+				D5D3FD8B40D29DE2B40EAA01 /* ViewModels */,
+				697C4CC313675C8BCAD1DF77 /* Views */,
+			);
+			path = DocuScanAI;
+			sourceTree = "<group>";
+		};
+		5C7846076A1D20B65A3C930A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4DC9ADE57233DF2BCA8ECA9 /* Assets.xcassets */,
+				F5AC6E980EE5226614E94345 /* Info.plist */,
+				B959BC2F9AE4C2F6796317C4 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		613FDAADAF3703712C90938C /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				5D905DF9261287EAC2FD0770 /* DocumentCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		697C4CC313675C8BCAD1DF77 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				55953F71D924DFA2B5DEC74F /* AIInsightsView.swift */,
+				2CE324A81767A2E6603A0F16 /* DocumentDetailView.swift */,
+				38A45162C66F2BB2B2CD152B /* FolderDetailView.swift */,
+				9CF35F7B93842212A9FB6F40 /* HomeView.swift */,
+				1B7795B9EE8E41EF32126B99 /* ScannerView.swift */,
+				81DCB4EC36CE11465D0F4204 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		785E87AD3F00A43CB028BC6B /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				FDB1F1036332153FADDEC6AD /* PaywallView.swift */,
+				97E9AC8A65E5ED077C96CEDF /* ProFeature.swift */,
+				2A15944AC794C45E87992337 /* SubscriptionManager.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		BE49AD55B3ACDA79F987E4C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				974352BD9D9D50CDB8638B2D /* DocuScanAI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5D3FD8B40D29DE2B40EAA01 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				434302954DA24F4E2A8259E7 /* AIInsightsViewModel.swift */,
+				99F34F06B148E8F535A016BD /* DocumentDetailViewModel.swift */,
+				6B0F854FA10DDF069DA356BA /* HomeViewModel.swift */,
+				7CE1B2D69C94C24A2E36EA8D /* ScannerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D918C75978FC89A556E8EE66 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A15C045C255475AA69D0AC84 /* ContentView.swift */,
+				FDDB85975F54C62EF9C22B92 /* DocuScanAIApp.swift */,
+				ED58D05B19F9F70A7D1993CE /* Models.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DC6EBE45AA3837ABA87E7375 = {
+			isa = PBXGroup;
+			children = (
+				4F2D4562DB0ECC8E699CFA5F /* DocuScanAI */,
+				613FDAADAF3703712C90938C /* Packages */,
+				BE49AD55B3ACDA79F987E4C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		47411C8CDC05F3EB7303054F /* DocuScanAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC341DACB08E8136A41927BB /* Build configuration list for PBXNativeTarget "DocuScanAI" */;
+			buildPhases = (
+				3FB6B74801EA308537384133 /* Sources */,
+				64EE0F0A9EF9A4C202B198E4 /* Resources */,
+				ADEBC8ADA1893250EC64EA10 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DocuScanAI;
+			packageProductDependencies = (
+				827A6E14EE95876D3D9E9746 /* DocumentCore */,
+				F1468559576F91D4EBFD48BC /* RevenueCat */,
+			);
+			productName = DocuScanAI;
+			productReference = 974352BD9D9D50CDB8638B2D /* DocuScanAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6B52592EAC2FAA93CDB0F019 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					47411C8CDC05F3EB7303054F = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = C1CC63CABE28DBAEB33904DE /* Build configuration list for PBXProject "DocuScanAI" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DC6EBE45AA3837ABA87E7375;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7AD3276F00C533DF5A3937D3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				160D06C1208B4A49750FD174 /* XCLocalSwiftPackageReference "../../DocumentCore" */,
+			);
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				47411C8CDC05F3EB7303054F /* DocuScanAI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64EE0F0A9EF9A4C202B198E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FA30F9994AB6F82F7BFEE6B /* Assets.xcassets in Resources */,
+				52CCAA3B792696B23D29A8E7 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3FB6B74801EA308537384133 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B64C8E0A008DFA280A74647 /* AIInsightsView.swift in Sources */,
+				65C2EA2210D9B2160FB18B2D /* AIInsightsViewModel.swift in Sources */,
+				42418BA32AA84A642A378E2B /* ContentView.swift in Sources */,
+				B1BA3B4678AA030E1898E7BF /* DocuScanAIApp.swift in Sources */,
+				7C55265826754789A1C1963B /* DocumentDetailView.swift in Sources */,
+				541C4CE735687299BAA5746B /* DocumentDetailViewModel.swift in Sources */,
+				241A4DC645F8539FB6BEEE38 /* FolderDetailView.swift in Sources */,
+				B04176B4D7973FF9C246847D /* HomeView.swift in Sources */,
+				35EBDBDB8BBE340998675BF9 /* HomeViewModel.swift in Sources */,
+				D5A97771D7C41CD604E5FD7A /* Models.swift in Sources */,
+				04F3C9D0D341CE9969E91FD6 /* PaywallView.swift in Sources */,
+				3A1F53991206BB3A0DEAF534 /* ProFeature.swift in Sources */,
+				D76BEB74FF133CC4E1844119 /* ScannerView.swift in Sources */,
+				E1B48EC431B87B9B8800C1A9 /* ScannerViewModel.swift in Sources */,
+				9020812AE3E627A7BFAD1FF3 /* SettingsView.swift in Sources */,
+				71C766FB2B2F6929C52915C5 /* SubscriptionManager.swift in Sources */,
+				594F3819E5997B7FEA3C23CF /* WatermarkService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0AB14C5E6FD6B6DB21D09027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 7RS696YC75;
+				INFOPLIST_FILE = DocuScanAI/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.documentintelligence.docuscan;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		651FFC2F13D56315412AF475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		67A8A1F04345CCDDCF383665 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 7RS696YC75;
+				INFOPLIST_FILE = DocuScanAI/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.documentintelligence.docuscan;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B619227A011E5C601F9E83AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C1CC63CABE28DBAEB33904DE /* Build configuration list for PBXProject "DocuScanAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B619227A011E5C601F9E83AE /* Debug */,
+				651FFC2F13D56315412AF475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CC341DACB08E8136A41927BB /* Build configuration list for PBXNativeTarget "DocuScanAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67A8A1F04345CCDDCF383665 /* Debug */,
+				0AB14C5E6FD6B6DB21D09027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		160D06C1208B4A49750FD174 /* XCLocalSwiftPackageReference "../../DocumentCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../DocumentCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7AD3276F00C533DF5A3937D3 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		827A6E14EE95876D3D9E9746 /* DocumentCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DocumentCore;
+		};
+		F1468559576F91D4EBFD48BC /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7AD3276F00C533DF5A3937D3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 6B52592EAC2FAA93CDB0F019 /* Project object */;
+}

@@ -24,6 +24,10 @@ targets:
     dependencies:
       - package: DocumentCore
         product: DocumentCore
+      - framework: AdServices.framework
+        embed: false
+      - framework: iAd.framework
+        embed: false
     settings:
       base:
         INFOPLIST_FILE: InvoiceFlowAI/Resources/Info.plist

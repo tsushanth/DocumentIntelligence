@@ -2,9 +2,16 @@ import SwiftUI
 
 @main
 struct InvoiceFlowAIApp: App {
-    
+
     @StateObject private var appState = InvoiceAppState()
-    
+
+    init() {
+        // Fetch Apple Search Ads attribution on app launch
+        Task {
+            await SearchAdsAttribution.shared.fetchAttribution()
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             InvoiceContentView()

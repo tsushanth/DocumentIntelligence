@@ -1,0 +1,13 @@
+/*
+  InfoPlist.strings
+  All-in-One PDF
+
+  English localization for Info.plist strings
+*/
+
+// App Name
+"CFBundleDisplayName" = "All-in-One PDF";
+"CFBundleName" = "All-in-One PDF";
+
+// Permission Descriptions
+"NSPhotoLibraryAddUsageDescription" = "All-in-One PDF needs access to save exported PDF pages as images to your Photos library.";

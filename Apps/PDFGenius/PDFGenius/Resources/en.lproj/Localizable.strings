@@ -1,0 +1,115 @@
+/*
+  Localizable.strings
+  All-in-One PDF
+
+  English localization
+*/
+
+// MARK: - Tab Bar
+"tab.documents" = "Documents";
+"tab.tools" = "Tools";
+"tab.settings" = "Settings";
+
+// MARK: - Documents
+"documents.title" = "PDFs";
+"documents.search" = "Search PDFs";
+"documents.empty.title" = "No Documents";
+"documents.empty.message" = "Import a PDF to get started";
+"documents.import" = "Import PDF";
+
+// MARK: - Tools
+"tools.title" = "Tools";
+"tools.merge" = "Merge PDFs";
+"tools.merge.description" = "Combine multiple PDFs";
+"tools.split" = "Split PDF";
+"tools.split.description" = "Extract pages";
+"tools.compress" = "Compress";
+"tools.compress.description" = "Reduce file size";
+"tools.convert" = "Convert";
+"tools.convert.description" = "PDF to images";
+"tools.password" = "Password";
+"tools.password.description" = "Protect PDF";
+"tools.ocr" = "OCR";
+"tools.ocr.description" = "Extract text";
+
+// MARK: - PDF Editor
+"editor.save" = "Save";
+"editor.share" = "Share";
+"editor.highlight" = "Highlight";
+"editor.underline" = "Underline";
+"editor.draw" = "Draw";
+"editor.text" = "Text";
+"editor.signature" = "Signature";
+"editor.undo" = "Undo";
+"editor.redo" = "Redo";
+
+// MARK: - AI Assistant
+"ai.title" = "AI Assistant";
+"ai.summary" = "Summary";
+"ai.summary.generate" = "Generate Summary";
+"ai.questions" = "Ask Questions";
+"ai.contract" = "Contract Analysis";
+"ai.processing" = "Processing...";
+
+// MARK: - Settings
+"settings.title" = "Settings";
+"settings.subscription" = "Subscription";
+"settings.pro.member" = "Pro Member";
+"settings.pro.unlocked" = "All features unlocked";
+"settings.upgrade" = "Upgrade to Pro";
+"settings.upgrade.description" = "Unlock all PDF tools & AI features";
+"settings.manage" = "Manage Subscription";
+"settings.general" = "General";
+"settings.default.view" = "Default View";
+"settings.export.quality" = "Export Quality";
+"settings.about" = "About";
+"settings.version" = "Version";
+"settings.privacy" = "Privacy Policy";
+"settings.terms" = "Terms of Service";
+"settings.restore" = "Restore Purchases";
+
+// MARK: - Paywall
+"paywall.title" = "Upgrade to Pro";
+"paywall.subtitle" = "Unlock all features and supercharge your PDF workflow";
+"paywall.features.title" = "Everything in Pro";
+"paywall.continue" = "Continue";
+"paywall.restore" = "Restore Purchases";
+"paywall.annual" = "Annual";
+"paywall.monthly" = "Monthly";
+"paywall.lifetime" = "Lifetime";
+"paywall.best.value" = "BEST VALUE";
+"paywall.one.time" = "ONE TIME";
+"paywall.save" = "Save %d%%";
+"paywall.per.month" = "%@/month";
+"paywall.billed.monthly" = "Billed monthly";
+"paywall.pay.once" = "Pay once, own forever";
+"paywall.terms" = "Terms of Use";
+"paywall.privacy" = "Privacy Policy";
+"paywall.disclaimer" = "Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current period. Manage subscriptions in Settings.";
+
+// MARK: - Pro Features
+"feature.signatures" = "Signatures";
+"feature.merge" = "Merge PDFs";
+"feature.split" = "Split PDFs";
+"feature.ai.summary" = "AI Summaries";
+"feature.contract" = "Contract Analysis";
+"feature.ocr" = "OCR Text";
+"feature.password" = "Password Protect";
+"feature.compress" = "Compress PDFs";
+
+// MARK: - Errors
+"error.title" = "Error";
+"error.ok" = "OK";
+"error.generic" = "An error occurred";
+"error.products.unavailable" = "Products not loaded. Please ensure you're connected to the internet and try again.";
+"error.purchase.failed" = "Purchase failed";
+"error.restore.failed" = "Restore failed";
+
+// MARK: - Common
+"common.cancel" = "Cancel";
+"common.done" = "Done";
+"common.delete" = "Delete";
+"common.edit" = "Edit";
+"common.share" = "Share";
+"common.copy" = "Copy";
+"common.retry" = "Retry";
