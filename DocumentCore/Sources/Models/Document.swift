@@ -151,4 +151,8 @@ public enum DocumentCategory: String, Codable, CaseIterable {
         case .other: return "doc"
         }
     }
+
+    public var displayName: String {
+        rawValue
+    }
 }

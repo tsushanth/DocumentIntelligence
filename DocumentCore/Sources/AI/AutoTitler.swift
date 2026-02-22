@@ -63,13 +63,13 @@ public final class AutoTitler {
             }
             return "Bill - \(formatDate(Date()))"
 
-        case .statement:
+        case .financial:
             if let accountName = fields.accountName, let date = fields.date {
                 return "Statement - \(accountName) - \(formatDate(date))"
             }
-            return "Statement - \(formatDate(Date()))"
+            return "Financial - \(formatDate(Date()))"
 
-        case .letter, .report, .form, .other:
+        case .letter, .report, .form, .identification, .medical, .other:
             if let subject = fields.subject {
                 return subject
             }

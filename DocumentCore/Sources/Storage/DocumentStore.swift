@@ -7,8 +7,8 @@ public final class DocumentStore: ObservableObject {
 
     public static let shared = DocumentStore()
 
-    @Published public private(set) var documents: [Document] = []
-    @Published public private(set) var folders: [Folder] = []
+    @Published public private(set) var documents: [DocumentEntity] = []
+    @Published public private(set) var folders: [FolderEntity] = []
 
     private let persistentContainer: NSPersistentContainer
 
@@ -52,11 +52,11 @@ public final class DocumentStore: ObservableObject {
         title: String,
         fileURL: URL,
         type: DocumentType,
-        folder: Folder? = nil
-    ) throws -> Document {
+        folder: FolderEntity? = nil
+    ) throws -> DocumentEntity {
         let context = viewContext
 
-        let document = Document(context: context)
+        let document = DocumentEntity(context: context)
         document.id = UUID()
         document.title = title
         document.fileURL = fileURL
@@ -72,14 +72,14 @@ public final class DocumentStore: ObservableObject {
     }
 
     /// Update a document
-    public func updateDocument(_ document: Document) throws {
+    public func updateDocument(_ document: DocumentEntity) throws {
         document.updatedAt = Date()
         try viewContext.save()
         fetchDocuments()
     }
 
     /// Delete a document
-    public func deleteDocument(_ document: Document) throws {
+    public func deleteDocument(_ document: DocumentEntity) throws {
         viewContext.delete(document)
         try viewContext.save()
         fetchDocuments()
@@ -92,8 +92,8 @@ public final class DocumentStore: ObservableObject {
 
     /// Fetch all documents
     private func fetchDocuments() {
-        let request: NSFetchRequest<Document> = Document.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Document.updatedAt, ascending: false)]
+        let request: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \DocumentEntity.updatedAt, ascending: false)]
 
         do {
             documents = try viewContext.fetch(request)
@@ -104,14 +104,14 @@ public final class DocumentStore: ObservableObject {
     }
 
     /// Search documents by title or OCR text
-    public func searchDocuments(query: String) -> [Document] {
-        let request: NSFetchRequest<Document> = Document.fetchRequest()
+    public func searchDocuments(query: String) -> [DocumentEntity] {
+        let request: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
 
         let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@", query)
         let ocrPredicate = NSPredicate(format: "ocrText CONTAINS[cd] %@", query)
         request.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, ocrPredicate])
 
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Document.updatedAt, ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \DocumentEntity.updatedAt, ascending: false)]
 
         do {
             return try viewContext.fetch(request)
@@ -124,10 +124,10 @@ public final class DocumentStore: ObservableObject {
     // MARK: - Folder Operations
 
     /// Create a new folder
-    public func createFolder(name: String, color: String? = nil) throws -> Folder {
+    public func createFolder(name: String, color: String? = nil) throws -> FolderEntity {
         let context = viewContext
 
-        let folder = Folder(context: context)
+        let folder = FolderEntity(context: context)
         folder.id = UUID()
         folder.name = name
         folder.color = color
@@ -140,13 +140,13 @@ public final class DocumentStore: ObservableObject {
     }
 
     /// Update a folder
-    public func updateFolder(_ folder: Folder) throws {
+    public func updateFolder(_ folder: FolderEntity) throws {
         try viewContext.save()
         fetchFolders()
     }
 
     /// Delete a folder
-    public func deleteFolder(_ folder: Folder) throws {
+    public func deleteFolder(_ folder: FolderEntity) throws {
         viewContext.delete(folder)
         try viewContext.save()
         fetchFolders()
@@ -154,8 +154,8 @@ public final class DocumentStore: ObservableObject {
 
     /// Fetch all folders
     private func fetchFolders() {
-        let request: NSFetchRequest<Folder> = Folder.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Folder.name, ascending: true)]
+        let request: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \FolderEntity.name, ascending: true)]
 
         do {
             folders = try viewContext.fetch(request)
@@ -166,7 +166,7 @@ public final class DocumentStore: ObservableObject {
     }
 
     /// Move document to folder
-    public func moveDocument(_ document: Document, to folder: Folder?) throws {
+    public func moveDocument(_ document: DocumentEntity, to folder: FolderEntity?) throws {
         document.folder = folder
         try viewContext.save()
         fetchDocuments()
@@ -195,7 +195,7 @@ public final class DocumentStore: ObservableObject {
     }
 
     /// Export document
-    public func exportDocument(_ document: Document) throws -> URL {
+    public func exportDocument(_ document: DocumentEntity) throws -> URL {
         guard let fileURL = document.fileURL else {
             throw DocumentStoreError.fileNotFound
         }

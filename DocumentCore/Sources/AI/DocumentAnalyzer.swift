@@ -80,22 +80,6 @@ public final class DocumentAnalyzer {
 
 // MARK: - Supporting Types
 
-public enum DocumentCategory: String, Codable {
-    case invoice
-    case receipt
-    case contract
-    case letter
-    case report
-    case form
-    case bill
-    case statement
-    case other
-
-    public var displayName: String {
-        rawValue.capitalized
-    }
-}
-
 public struct ContractAnalysis: Codable {
     public let parties: [String]
     public let effectiveDate: String?
