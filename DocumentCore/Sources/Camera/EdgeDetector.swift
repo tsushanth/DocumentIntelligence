@@ -99,12 +99,12 @@ public final class EdgeDetector {
     public func applyPerspectiveCorrection(to image: UIImage, corners: DocumentCorners) -> UIImage? {
         guard let ciImage = CIImage(image: image) else { return nil }
 
-        let filter = CIFilter.perspectiveCorrection()
-        filter.inputImage = ciImage
-        filter.topLeft = corners.topLeft
-        filter.topRight = corners.topRight
-        filter.bottomLeft = corners.bottomLeft
-        filter.bottomRight = corners.bottomRight
+        guard let filter = CIFilter(name: "CIPerspectiveCorrection") else { return nil }
+        filter.setValue(ciImage, forKey: kCIInputImageKey)
+        filter.setValue(CIVector(cgPoint: corners.topLeft), forKey: "inputTopLeft")
+        filter.setValue(CIVector(cgPoint: corners.topRight), forKey: "inputTopRight")
+        filter.setValue(CIVector(cgPoint: corners.bottomLeft), forKey: "inputBottomLeft")
+        filter.setValue(CIVector(cgPoint: corners.bottomRight), forKey: "inputBottomRight")
 
         guard let outputImage = filter.outputImage else { return nil }
 
