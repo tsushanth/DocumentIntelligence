@@ -3,84 +3,94 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ASSETS001BUILDFILE00001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSETS001FILEREF00001 /* Assets.xcassets */; };
-		STOREKIT01BUILDFILE001 /* InvoiceFlowProducts.storekit in Resources */ = {isa = PBXBuildFile; fileRef = STOREKIT01FILEREF0001 /* InvoiceFlowProducts.storekit */; };
-		0186FBF11870E68862E9C67C /* CreateEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3C2F6CD6AB4E7D5316271 /* CreateEstimateView.swift */; };
+		00FFA495C0588388B25219E2 /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = ECDAFDCFA9DFB067BA72F2B8 /* FacebookAEM */; };
+		01BCB0DDC2715ACE1AD4DA53 /* SearchAdsAttribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74386040F4AFF232FA8E8F /* SearchAdsAttribution.swift */; };
+		028D9FA424C9BADBFCFCA2C8 /* ClientPortalGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C959B919B15D1BD2685D5 /* ClientPortalGenerator.swift */; };
+		14C71ED567A590EF717CE2B3 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5C5E2D32F398D8BDF4AB1D85 /* FacebookCore */; };
 		17BBDE4F854F69A40F3A0974 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEE6B8537DDFB4C0F6A12B5 /* InvoiceDetailView.swift */; };
-		18CEC2BBC61430DDE0D12735 /* ExportDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1339EDC12F8D2876F38132F /* ExportDataView.swift */; };
+		20698A7B9AF722869578DE2C /* LateFeeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680627744B7588BA5EA3FCE1 /* LateFeeSettingsView.swift */; };
 		2BB8802091D6A3157DDBFFD0 /* ClientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C07C19CB269B126276D6D9F /* ClientsView.swift */; };
-		36A07A2F144EFDB245F4DB48 /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6CA1C1C6E20EC4FD12A9C7 /* SignatureView.swift */; };
+		336EDE5F2C4250747B9D1D2B /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B19AD8B0B4622F08FD214 /* DashboardView.swift */; };
+		3C7D1DFEDC7C06C441F0A977 /* FacebookSDKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D18666C87E52CC326D41DB /* FacebookSDKManager.swift */; };
 		3E73306AE2DED3280DAC69EE /* VoiceToInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E222DACB80012015E95113 /* VoiceToInvoiceViewModel.swift */; };
-		43F1E6E14669BD5B700EECC1 /* EstimateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5015ED0CA9900631D2F1C9 /* EstimateListViewModel.swift */; };
+		60C373FF7551E0FE9BB4CE82 /* EstimateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5031C50B1DB4F34A8E97FA82 /* EstimateDetailView.swift */; };
 		646763EA6B469D25AC5B10E2 /* InvoiceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E25329C8D611A20238E5AF1 /* InvoiceContentView.swift */; };
+		6B1ADF583D2CA02D49B2B160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6818982718F829603C36EF1D /* Assets.xcassets */; };
+		777D40CB81BCB22292EA5D1C /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9D439CB5AB48DF2E3B6B /* SignatureView.swift */; };
 		78B1DDCDA9188D6C55728E96 /* DocumentCore in Frameworks */ = {isa = PBXBuildFile; productRef = 21CB0F951D5F103FDFF0B2A6 /* DocumentCore */; };
-		8087D643C4E547500EDD87E9 /* CloudSyncSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E9CA3668D171CCEACFD11C /* CloudSyncSettingsView.swift */; };
+		81AFD8BC615055FEA6D82A21 /* InvoiceFlowProducts.storekit in Resources */ = {isa = PBXBuildFile; fileRef = CCBC9659317C6BF553C59154 /* InvoiceFlowProducts.storekit */; };
 		8C4CD60CF8DC5BEDC00874B0 /* ClientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93076C3EF98E13FE921F59CB /* ClientsViewModel.swift */; };
-		8F57E923001392ACC4C9378A /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4069AE1DB9B0C82779B0DCD /* CSVExporter.swift */; };
-		9D4C5980C19780DD79EFDA06 /* CreateEstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FC54F35F38150B09AAC518 /* CreateEstimateViewModel.swift */; };
+		8CA91799F3FC5CF83A7FB618 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1C3344A7CC77A217816DD9 /* NetworkMonitor.swift */; };
+		8D1B498C78FDA0B0D07A0A59 /* PDFTemplateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4979425DB99048E9E816401F /* PDFTemplateGenerator.swift */; };
+		989B0D2569B2C642EE6AAA4A /* ExportDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA16BB8EAD65C6738560A43 /* ExportDataView.swift */; };
 		9DB5EB2F0E97FF721AD42415 /* ScanReceiptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813CB65132C5C285F3D989D6 /* ScanReceiptViewModel.swift */; };
+		A156BFC46612750744ABE2B3 /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62EC80BBC79942D4FB41C96F /* AdServices.framework */; };
+		A6D6D1643E1E7CF2C41965E5 /* CreateEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2380300410D1FA34E35E1BF /* CreateEstimateView.swift */; };
 		A79A93CA22B86914499696C3 /* InvoiceFlowAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6E53307C27C92569F6E646 /* InvoiceFlowAIApp.swift */; };
-		AD689134ECC2C33223933545 /* ClientPortalGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4894715924E47BA085B08E1A /* ClientPortalGenerator.swift */; };
 		B248BD4AE92B6E680A5B8160 /* InvoiceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE0F98CA005178F130C07E9 /* InvoiceListView.swift */; };
+		B73EC1570088E44CEDD383BE /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97217402D39AECACF386DC11 /* iAd.framework */; };
 		BB36A2B5D211CDA0145E5630 /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8510C26F7900243368DA045 /* ItemsView.swift */; };
-		CA976D70720B1B249717DE7A /* CloudSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36927CD0140735828F2567A4 /* CloudSyncManager.swift */; };
-		D744F8544E97D87DF92A077A /* EstimateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A647B69CFFC1023FFBAF8E48 /* EstimateListView.swift */; };
+		BBF831AB3F35D1373F37DF24 /* CloudSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C770C5034B14164AD3AF4 /* CloudSyncManager.swift */; };
+		C4B2AD30F33F9C6DF89D449F /* CloudSyncSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA88D70AC5309D7B8F174005 /* CloudSyncSettingsView.swift */; };
+		D1B16D11D583C6D86E0A70BF /* EstimateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA52A5EE87C7182FE42AEC08 /* EstimateListView.swift */; };
 		DDDD474D78610987B9BFFC3A /* CreateInvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1CB1FCC1333542678EFB60 /* CreateInvoiceView.swift */; };
-		E1EC38784FC12FC27FFC5150 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0ADBD990C0FE2530E98338 /* NetworkMonitor.swift */; };
 		E456A0D9C3495A072BF6E4E4 /* ScanReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E9A984CCC1AC8D5BE4BC7 /* ScanReceiptView.swift */; };
-		E630B10FE68CD3950CC68384 /* PDFTemplateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBAAAC7672C66CB69499F92 /* PDFTemplateGenerator.swift */; };
 		E685ECEB8A5C0FAFFF8557CB /* CreateInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA8331629B24C45E3890252 /* CreateInvoiceViewModel.swift */; };
-		E99C80291A238EC93A63EE67 /* LateFeeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8620EB9842FF0A9DC73A90AC /* LateFeeSettingsView.swift */; };
-		F29F420839B512C0651F74FE /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB9C089B0BF91BA0469F6BA /* DashboardView.swift */; };
+		E77CC85019F9F372486A8BE5 /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D314C5F8BAA93A71E3D24E3 /* CSVExporter.swift */; };
 		F3766F452575AB686024325A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B61A3389EB6321D48F8F9 /* Models.swift */; };
+		F384F419920C3B1B747B7680 /* EstimateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF0E675118201BE1F5361D /* EstimateListViewModel.swift */; };
 		F61735B8FE27856438BC266A /* VoiceToInvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563AD42AEE4AC625BEDBA2B0 /* VoiceToInvoiceView.swift */; };
 		F664FB3285D0E26AAABF07BE /* InvoiceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8183D5C95A3EF97816BB6706 /* InvoiceSettingsView.swift */; };
-		F974927D78586526A13A03CF /* EstimateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48934A15BB747C8B6892A99A /* EstimateDetailView.swift */; };
+		F82188A70657F5EFCEBE3E53 /* CreateEstimateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C367E93CA75CA60E3C729 /* CreateEstimateViewModel.swift */; };
 		FFDBCBCA530F84B35682AF47 /* InvoiceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6E2F0849A748751B524A4 /* InvoiceListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ASSETS001FILEREF00001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		STOREKIT01FILEREF0001 /* InvoiceFlowProducts.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = InvoiceFlowProducts.storekit; sourceTree = "<group>"; };
-		ENTITLEMENTS01FILEREF /* InvoiceFlowAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InvoiceFlowAI.entitlements; sourceTree = "<group>"; };
+		0D7C770C5034B14164AD3AF4 /* CloudSyncManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSyncManager.swift; sourceTree = "<group>"; };
 		0E25329C8D611A20238E5AF1 /* InvoiceContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceContentView.swift; sourceTree = "<group>"; };
-		1E0ADBD990C0FE2530E98338 /* NetworkMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		1F74386040F4AFF232FA8E8F /* SearchAdsAttribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAdsAttribution.swift; sourceTree = "<group>"; };
+		25DD9D439CB5AB48DF2E3B6B /* SignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureView.swift; sourceTree = "<group>"; };
 		2EA8331629B24C45E3890252 /* CreateInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInvoiceViewModel.swift; sourceTree = "<group>"; };
 		2EEF4ECD5EF28A9704FCC20A /* DocumentCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DocumentCore; path = ../../DocumentCore; sourceTree = SOURCE_ROOT; };
-		36927CD0140735828F2567A4 /* CloudSyncManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CloudSyncManager.swift; sourceTree = "<group>"; };
 		388E9A984CCC1AC8D5BE4BC7 /* ScanReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReceiptView.swift; sourceTree = "<group>"; };
 		3AE6E2F0849A748751B524A4 /* InvoiceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListViewModel.swift; sourceTree = "<group>"; };
-		3BBAAAC7672C66CB69499F92 /* PDFTemplateGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PDFTemplateGenerator.swift; sourceTree = "<group>"; };
-		48934A15BB747C8B6892A99A /* EstimateDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EstimateDetailView.swift; sourceTree = "<group>"; };
-		4894715924E47BA085B08E1A /* ClientPortalGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ClientPortalGenerator.swift; sourceTree = "<group>"; };
+		3D2C367E93CA75CA60E3C729 /* CreateEstimateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEstimateViewModel.swift; sourceTree = "<group>"; };
+		4979425DB99048E9E816401F /* PDFTemplateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTemplateGenerator.swift; sourceTree = "<group>"; };
+		5031C50B1DB4F34A8E97FA82 /* EstimateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateDetailView.swift; sourceTree = "<group>"; };
+		51CB9FA514E1C957531F0A6B /* InvoiceFlowAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InvoiceFlowAI.entitlements; sourceTree = "<group>"; };
+		55D18666C87E52CC326D41DB /* FacebookSDKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookSDKManager.swift; sourceTree = "<group>"; };
 		563AD42AEE4AC625BEDBA2B0 /* VoiceToInvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceToInvoiceView.swift; sourceTree = "<group>"; };
 		5C9B61A3389EB6321D48F8F9 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		5F6CA1C1C6E20EC4FD12A9C7 /* SignatureView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SignatureView.swift; sourceTree = "<group>"; };
 		5F6E53307C27C92569F6E646 /* InvoiceFlowAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceFlowAIApp.swift; sourceTree = "<group>"; };
-		65E9CA3668D171CCEACFD11C /* CloudSyncSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CloudSyncSettingsView.swift; sourceTree = "<group>"; };
+		62EC80BBC79942D4FB41C96F /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdServices.framework; sourceTree = "<group>"; };
+		657B19AD8B0B4622F08FD214 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		66E222DACB80012015E95113 /* VoiceToInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceToInvoiceViewModel.swift; sourceTree = "<group>"; };
+		680627744B7588BA5EA3FCE1 /* LateFeeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LateFeeSettingsView.swift; sourceTree = "<group>"; };
+		6818982718F829603C36EF1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		698820D39E34FCAFDC81F4D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6C1C3344A7CC77A217816DD9 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		6CA16BB8EAD65C6738560A43 /* ExportDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataView.swift; sourceTree = "<group>"; };
 		813CB65132C5C285F3D989D6 /* ScanReceiptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReceiptViewModel.swift; sourceTree = "<group>"; };
 		8183D5C95A3EF97816BB6706 /* InvoiceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceSettingsView.swift; sourceTree = "<group>"; };
-		8620EB9842FF0A9DC73A90AC /* LateFeeSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LateFeeSettingsView.swift; sourceTree = "<group>"; };
-		87FC54F35F38150B09AAC518 /* CreateEstimateViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreateEstimateViewModel.swift; sourceTree = "<group>"; };
+		8A5C959B919B15D1BD2685D5 /* ClientPortalGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientPortalGenerator.swift; sourceTree = "<group>"; };
 		8C07C19CB269B126276D6D9F /* ClientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsView.swift; sourceTree = "<group>"; };
+		8DDF0E675118201BE1F5361D /* EstimateListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateListViewModel.swift; sourceTree = "<group>"; };
 		93076C3EF98E13FE921F59CB /* ClientsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsViewModel.swift; sourceTree = "<group>"; };
-		A1339EDC12F8D2876F38132F /* ExportDataView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ExportDataView.swift; sourceTree = "<group>"; };
-		A647B69CFFC1023FFBAF8E48 /* EstimateListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EstimateListView.swift; sourceTree = "<group>"; };
-		B1B3C2F6CD6AB4E7D5316271 /* CreateEstimateView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreateEstimateView.swift; sourceTree = "<group>"; };
+		97217402D39AECACF386DC11 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iAd.framework; sourceTree = "<group>"; };
+		9D314C5F8BAA93A71E3D24E3 /* CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExporter.swift; sourceTree = "<group>"; };
+		B2380300410D1FA34E35E1BF /* CreateEstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEstimateView.swift; sourceTree = "<group>"; };
 		BB1CB1FCC1333542678EFB60 /* CreateInvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInvoiceView.swift; sourceTree = "<group>"; };
-		C4069AE1DB9B0C82779B0DCD /* CSVExporter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CSVExporter.swift; sourceTree = "<group>"; };
 		CAE0F98CA005178F130C07E9 /* InvoiceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListView.swift; sourceTree = "<group>"; };
-		CBB9C089B0BF91BA0469F6BA /* DashboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
-		CD5015ED0CA9900631D2F1C9 /* EstimateListViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EstimateListViewModel.swift; sourceTree = "<group>"; };
-		D49759415C91A2E7EB7B9FF0 /* InvoiceFlowAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceFlowAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCBC9659317C6BF553C59154 /* InvoiceFlowProducts.storekit */ = {isa = PBXFileReference; path = InvoiceFlowProducts.storekit; sourceTree = "<group>"; };
+		D49759415C91A2E7EB7B9FF0 /* InvoiceFlowAI.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = InvoiceFlowAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8510C26F7900243368DA045 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
+		EA52A5EE87C7182FE42AEC08 /* EstimateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateListView.swift; sourceTree = "<group>"; };
 		EEEE6B8537DDFB4C0F6A12B5 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
+		FA88D70AC5309D7B8F174005 /* CloudSyncSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSyncSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +99,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				78B1DDCDA9188D6C55728E96 /* DocumentCore in Frameworks */,
+				14C71ED567A590EF717CE2B3 /* FacebookCore in Frameworks */,
+				00FFA495C0588388B25219E2 /* FacebookAEM in Frameworks */,
+				A156BFC46612750744ABE2B3 /* AdServices.framework in Frameworks */,
+				B73EC1570088E44CEDD383BE /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +114,7 @@
 			children = (
 				313B48B17FBF17DB0A73B000 /* InvoiceFlowAI */,
 				1800F2449CE9A2D288BC56F5 /* Packages */,
+				2CE71203221913B34F10BCCA /* Frameworks */,
 				A987138DD209B52C00DD6E74 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,23 +131,46 @@
 			isa = PBXGroup;
 			children = (
 				8C07C19CB269B126276D6D9F /* ClientsView.swift */,
+				FA88D70AC5309D7B8F174005 /* CloudSyncSettingsView.swift */,
+				B2380300410D1FA34E35E1BF /* CreateEstimateView.swift */,
 				BB1CB1FCC1333542678EFB60 /* CreateInvoiceView.swift */,
+				657B19AD8B0B4622F08FD214 /* DashboardView.swift */,
+				5031C50B1DB4F34A8E97FA82 /* EstimateDetailView.swift */,
+				EA52A5EE87C7182FE42AEC08 /* EstimateListView.swift */,
+				6CA16BB8EAD65C6738560A43 /* ExportDataView.swift */,
 				EEEE6B8537DDFB4C0F6A12B5 /* InvoiceDetailView.swift */,
 				CAE0F98CA005178F130C07E9 /* InvoiceListView.swift */,
 				8183D5C95A3EF97816BB6706 /* InvoiceSettingsView.swift */,
 				E8510C26F7900243368DA045 /* ItemsView.swift */,
+				680627744B7588BA5EA3FCE1 /* LateFeeSettingsView.swift */,
 				388E9A984CCC1AC8D5BE4BC7 /* ScanReceiptView.swift */,
+				25DD9D439CB5AB48DF2E3B6B /* SignatureView.swift */,
 				563AD42AEE4AC625BEDBA2B0 /* VoiceToInvoiceView.swift */,
-				A647B69CFFC1023FFBAF8E48 /* EstimateListView.swift */,
-				B1B3C2F6CD6AB4E7D5316271 /* CreateEstimateView.swift */,
-				48934A15BB747C8B6892A99A /* EstimateDetailView.swift */,
-				CBB9C089B0BF91BA0469F6BA /* DashboardView.swift */,
-				A1339EDC12F8D2876F38132F /* ExportDataView.swift */,
-				8620EB9842FF0A9DC73A90AC /* LateFeeSettingsView.swift */,
-				5F6CA1C1C6E20EC4FD12A9C7 /* SignatureView.swift */,
-				65E9CA3668D171CCEACFD11C /* CloudSyncSettingsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1D2519AF8DF1B316882AE096 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8A5C959B919B15D1BD2685D5 /* ClientPortalGenerator.swift */,
+				0D7C770C5034B14164AD3AF4 /* CloudSyncManager.swift */,
+				9D314C5F8BAA93A71E3D24E3 /* CSVExporter.swift */,
+				55D18666C87E52CC326D41DB /* FacebookSDKManager.swift */,
+				6C1C3344A7CC77A217816DD9 /* NetworkMonitor.swift */,
+				4979425DB99048E9E816401F /* PDFTemplateGenerator.swift */,
+				1F74386040F4AFF232FA8E8F /* SearchAdsAttribution.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		2CE71203221913B34F10BCCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				62EC80BBC79942D4FB41C96F /* AdServices.framework */,
+				97217402D39AECACF386DC11 /* iAd.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		313B48B17FBF17DB0A73B000 /* InvoiceFlowAI */ = {
@@ -140,9 +178,9 @@
 			children = (
 				FEEF7C7F0D16494AE7659A12 /* App */,
 				3516E2E3F3F4B30313486C87 /* Resources */,
+				1D2519AF8DF1B316882AE096 /* Utilities */,
 				E3374A26BE9D00BF609F7E5E /* ViewModels */,
 				1C5AAF1FA6355AD651C881DF /* Views */,
-				8D03B1FC81A39CAE111732B6 /* Utilities */,
 			);
 			path = InvoiceFlowAI;
 			sourceTree = "<group>";
@@ -150,25 +188,12 @@
 		3516E2E3F3F4B30313486C87 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				ASSETS001FILEREF00001 /* Assets.xcassets */,
-				ENTITLEMENTS01FILEREF /* InvoiceFlowAI.entitlements */,
+				6818982718F829603C36EF1D /* Assets.xcassets */,
 				698820D39E34FCAFDC81F4D6 /* Info.plist */,
-				STOREKIT01FILEREF0001 /* InvoiceFlowProducts.storekit */,
+				51CB9FA514E1C957531F0A6B /* InvoiceFlowAI.entitlements */,
+				CCBC9659317C6BF553C59154 /* InvoiceFlowProducts.storekit */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		8D03B1FC81A39CAE111732B6 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				3BBAAAC7672C66CB69499F92 /* PDFTemplateGenerator.swift */,
-				1E0ADBD990C0FE2530E98338 /* NetworkMonitor.swift */,
-				4894715924E47BA085B08E1A /* ClientPortalGenerator.swift */,
-				C4069AE1DB9B0C82779B0DCD /* CSVExporter.swift */,
-				36927CD0140735828F2567A4 /* CloudSyncManager.swift */,
-			);
-			name = Utilities;
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		A987138DD209B52C00DD6E74 /* Products */ = {
@@ -183,12 +208,12 @@
 			isa = PBXGroup;
 			children = (
 				93076C3EF98E13FE921F59CB /* ClientsViewModel.swift */,
+				3D2C367E93CA75CA60E3C729 /* CreateEstimateViewModel.swift */,
 				2EA8331629B24C45E3890252 /* CreateInvoiceViewModel.swift */,
+				8DDF0E675118201BE1F5361D /* EstimateListViewModel.swift */,
 				3AE6E2F0849A748751B524A4 /* InvoiceListViewModel.swift */,
 				813CB65132C5C285F3D989D6 /* ScanReceiptViewModel.swift */,
 				66E222DACB80012015E95113 /* VoiceToInvoiceViewModel.swift */,
-				CD5015ED0CA9900631D2F1C9 /* EstimateListViewModel.swift */,
-				87FC54F35F38150B09AAC518 /* CreateEstimateViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -205,26 +230,14 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXResourcesBuildPhase section */
-		RESOURCES01BUILDPHASE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ASSETS001BUILDFILE00001 /* Assets.xcassets in Resources */,
-				STOREKIT01BUILDFILE001 /* InvoiceFlowProducts.storekit in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		636143BC62AEBC430FC8BD63 /* InvoiceFlowAI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1EAB59C30922D2522DD0195 /* Build configuration list for PBXNativeTarget "InvoiceFlowAI" */;
 			buildPhases = (
 				201666E138F38946356BEA1A /* Sources */,
+				A1A0B5FCAEC47802B273B9CB /* Resources */,
 				9BC07F47C60A4312FAB5C5F0 /* Frameworks */,
-				RESOURCES01BUILDPHASE /* Resources */,
 			);
 			buildRules = (
 			);
@@ -233,6 +246,8 @@
 			name = InvoiceFlowAI;
 			packageProductDependencies = (
 				21CB0F951D5F103FDFF0B2A6 /* DocumentCore */,
+				5C5E2D32F398D8BDF4AB1D85 /* FacebookCore */,
+				ECDAFDCFA9DFB067BA72F2B8 /* FacebookAEM */,
 			);
 			productName = InvoiceFlowAI;
 			productReference = D49759415C91A2E7EB7B9FF0 /* InvoiceFlowAI.app */;
@@ -248,6 +263,7 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					636143BC62AEBC430FC8BD63 = {
+						DevelopmentTeam = 7RS696YC75;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -263,9 +279,10 @@
 			mainGroup = 0DB2307AAF04508E6406842A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				830738D6A63E584D70559937 /* XCLocalSwiftPackageReference "DocumentCore" */,
+				B57CD22D04BC21971651FE6B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				830738D6A63E584D70559937 /* XCLocalSwiftPackageReference "../../DocumentCore" */,
 			);
-			productRefGroup = A987138DD209B52C00DD6E74 /* Products */;
+			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -274,15 +291,39 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		A1A0B5FCAEC47802B273B9CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B1ADF583D2CA02D49B2B160 /* Assets.xcassets in Resources */,
+				81AFD8BC615055FEA6D82A21 /* InvoiceFlowProducts.storekit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		201666E138F38946356BEA1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E77CC85019F9F372486A8BE5 /* CSVExporter.swift in Sources */,
+				028D9FA424C9BADBFCFCA2C8 /* ClientPortalGenerator.swift in Sources */,
 				2BB8802091D6A3157DDBFFD0 /* ClientsView.swift in Sources */,
 				8C4CD60CF8DC5BEDC00874B0 /* ClientsViewModel.swift in Sources */,
+				BBF831AB3F35D1373F37DF24 /* CloudSyncManager.swift in Sources */,
+				C4B2AD30F33F9C6DF89D449F /* CloudSyncSettingsView.swift in Sources */,
+				A6D6D1643E1E7CF2C41965E5 /* CreateEstimateView.swift in Sources */,
+				F82188A70657F5EFCEBE3E53 /* CreateEstimateViewModel.swift in Sources */,
 				DDDD474D78610987B9BFFC3A /* CreateInvoiceView.swift in Sources */,
 				E685ECEB8A5C0FAFFF8557CB /* CreateInvoiceViewModel.swift in Sources */,
+				336EDE5F2C4250747B9D1D2B /* DashboardView.swift in Sources */,
+				60C373FF7551E0FE9BB4CE82 /* EstimateDetailView.swift in Sources */,
+				D1B16D11D583C6D86E0A70BF /* EstimateListView.swift in Sources */,
+				F384F419920C3B1B747B7680 /* EstimateListViewModel.swift in Sources */,
+				989B0D2569B2C642EE6AAA4A /* ExportDataView.swift in Sources */,
+				3C7D1DFEDC7C06C441F0A977 /* FacebookSDKManager.swift in Sources */,
 				646763EA6B469D25AC5B10E2 /* InvoiceContentView.swift in Sources */,
 				17BBDE4F854F69A40F3A0974 /* InvoiceDetailView.swift in Sources */,
 				A79A93CA22B86914499696C3 /* InvoiceFlowAIApp.swift in Sources */,
@@ -290,26 +331,16 @@
 				FFDBCBCA530F84B35682AF47 /* InvoiceListViewModel.swift in Sources */,
 				F664FB3285D0E26AAABF07BE /* InvoiceSettingsView.swift in Sources */,
 				BB36A2B5D211CDA0145E5630 /* ItemsView.swift in Sources */,
+				20698A7B9AF722869578DE2C /* LateFeeSettingsView.swift in Sources */,
 				F3766F452575AB686024325A /* Models.swift in Sources */,
+				8CA91799F3FC5CF83A7FB618 /* NetworkMonitor.swift in Sources */,
+				8D1B498C78FDA0B0D07A0A59 /* PDFTemplateGenerator.swift in Sources */,
 				E456A0D9C3495A072BF6E4E4 /* ScanReceiptView.swift in Sources */,
 				9DB5EB2F0E97FF721AD42415 /* ScanReceiptViewModel.swift in Sources */,
+				01BCB0DDC2715ACE1AD4DA53 /* SearchAdsAttribution.swift in Sources */,
+				777D40CB81BCB22292EA5D1C /* SignatureView.swift in Sources */,
 				F61735B8FE27856438BC266A /* VoiceToInvoiceView.swift in Sources */,
 				3E73306AE2DED3280DAC69EE /* VoiceToInvoiceViewModel.swift in Sources */,
-				E630B10FE68CD3950CC68384 /* PDFTemplateGenerator.swift in Sources */,
-				43F1E6E14669BD5B700EECC1 /* EstimateListViewModel.swift in Sources */,
-				9D4C5980C19780DD79EFDA06 /* CreateEstimateViewModel.swift in Sources */,
-				D744F8544E97D87DF92A077A /* EstimateListView.swift in Sources */,
-				0186FBF11870E68862E9C67C /* CreateEstimateView.swift in Sources */,
-				F974927D78586526A13A03CF /* EstimateDetailView.swift in Sources */,
-				E1EC38784FC12FC27FFC5150 /* NetworkMonitor.swift in Sources */,
-				AD689134ECC2C33223933545 /* ClientPortalGenerator.swift in Sources */,
-				F29F420839B512C0651F74FE /* DashboardView.swift in Sources */,
-				18CEC2BBC61430DDE0D12735 /* ExportDataView.swift in Sources */,
-				E99C80291A238EC93A63EE67 /* LateFeeSettingsView.swift in Sources */,
-				8F57E923001392ACC4C9378A /* CSVExporter.swift in Sources */,
-				36A07A2F144EFDB245F4DB48 /* SignatureView.swift in Sources */,
-				8087D643C4E547500EDD87E9 /* CloudSyncSettingsView.swift in Sources */,
-				CA976D70720B1B249717DE7A /* CloudSyncManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,9 +383,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7RS696YC75;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FACEBOOK_APP_ID = "";
+				FACEBOOK_CLIENT_TOKEN = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -388,8 +421,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = InvoiceFlowAI/Resources/InvoiceFlowAI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 7RS696YC75;
+				CURRENT_PROJECT_VERSION = 2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
 				INFOPLIST_FILE = InvoiceFlowAI/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -438,9 +474,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7RS696YC75;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FACEBOOK_APP_ID = "";
+				FACEBOOK_CLIENT_TOKEN = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -467,8 +505,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = InvoiceFlowAI/Resources/InvoiceFlowAI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 7RS696YC75;
+				CURRENT_PROJECT_VERSION = 2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
 				INFOPLIST_FILE = InvoiceFlowAI/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -505,16 +546,37 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		830738D6A63E584D70559937 /* XCLocalSwiftPackageReference "DocumentCore" */ = {
+		830738D6A63E584D70559937 /* XCLocalSwiftPackageReference "../../DocumentCore" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../DocumentCore;
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		B57CD22D04BC21971651FE6B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 17.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		21CB0F951D5F103FDFF0B2A6 /* DocumentCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DocumentCore;
+		};
+		5C5E2D32F398D8BDF4AB1D85 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B57CD22D04BC21971651FE6B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		ECDAFDCFA9DFB067BA72F2B8 /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B57CD22D04BC21971651FE6B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,6 +6,9 @@ struct InvoiceFlowAIApp: App {
     @StateObject private var appState = InvoiceAppState()
 
     init() {
+        // Initialize Facebook SDK for Meta Ads attribution
+        FacebookSDKManager.shared.initialize()
+
         // Fetch Apple Search Ads attribution on app launch
         Task {
             await SearchAdsAttribution.shared.fetchAttribution()

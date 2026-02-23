@@ -10,10 +10,15 @@ settings:
     DEVELOPMENT_TEAM: "7RS696YC75"
     CODE_SIGN_STYLE: Automatic
     SWIFT_VERSION: "5.9"
+    FACEBOOK_APP_ID: ""
+    FACEBOOK_CLIENT_TOKEN: ""
 
 packages:
   DocumentCore:
     path: ../../DocumentCore
+  FacebookSDK:
+    url: https://github.com/facebook/facebook-ios-sdk
+    from: "17.0.0"
 
 targets:
   InvoiceFlowAI:
@@ -24,6 +29,10 @@ targets:
     dependencies:
       - package: DocumentCore
         product: DocumentCore
+      - package: FacebookSDK
+        product: FacebookCore
+      - package: FacebookSDK
+        product: FacebookAEM
       - framework: AdServices.framework
         embed: false
       - framework: iAd.framework
@@ -59,3 +68,17 @@ targets:
         NSSpeechRecognitionUsageDescription: "InvoiceFlow AI uses speech recognition for voice-to-invoice feature"
         NSMicrophoneUsageDescription: "InvoiceFlow AI needs microphone access for voice-to-invoice feature"
         ITSAppUsesNonExemptEncryption: false
+        NSUserTrackingUsageDescription: "This identifier will be used to deliver personalized ads to you."
+        FacebookAppID: "$(FACEBOOK_APP_ID)"
+        FacebookClientToken: "$(FACEBOOK_CLIENT_TOKEN)"
+        FacebookDisplayName: "InvoiceFlow Pro"
+        FacebookAutoLogAppEventsEnabled: true
+        FacebookAdvertiserIDCollectionEnabled: true
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - "fb$(FACEBOOK_APP_ID)"
+        LSApplicationQueriesSchemes:
+          - fbapi
+          - fb-messenger-share-api
+          - fbauth2
+          - fbshareextension
