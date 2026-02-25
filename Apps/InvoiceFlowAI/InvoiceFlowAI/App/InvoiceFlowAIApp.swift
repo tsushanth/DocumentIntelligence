@@ -6,6 +6,9 @@ struct InvoiceFlowAIApp: App {
     @StateObject private var appState = InvoiceAppState()
 
     init() {
+        // Configure Firebase Analytics for Google Ads attribution
+        FirebaseAnalyticsManager.shared.configure()
+
         // Fetch Apple Search Ads attribution on app launch
         Task {
             await SearchAdsAttribution.shared.fetchAttribution()

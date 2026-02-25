@@ -2,11 +2,11 @@ import SwiftUI
 import VisionKit
 
 struct ScanReceiptView: View {
-    
+
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = ScanReceiptViewModel()
-    @EnvironmentObject var appState: InvoiceAppState
-    
+    @EnvironmentObject var appState: AppState
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -21,7 +21,7 @@ struct ScanReceiptView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(maxHeight: 300)
                                 .cornerRadius(12)
-                            
+
                             if viewModel.isProcessing {
                                 ProgressView("Extracting receipt data...")
                             } else if let expense = viewModel.extractedExpense {
@@ -34,20 +34,20 @@ struct ScanReceiptView: View {
                     // Initial state
                     VStack(spacing: 24) {
                         Spacer()
-                        
+
                         Image(systemName: "doc.text.viewfinder")
                             .font(.system(size: 80))
                             .foregroundColor(.orange.opacity(0.5))
-                        
+
                         Text("Scan a Receipt")
                             .font(.title2.bold())
-                        
+
                         Text("We'll automatically extract the expense details")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 40)
-                        
+
                         Button(action: { viewModel.showScanner = true }) {
                             Label("Start Scanning", systemImage: "camera.fill")
                                 .font(.headline)
@@ -58,26 +58,22 @@ struct ScanReceiptView: View {
                                 .cornerRadius(12)
                         }
                         .padding(.horizontal, 40)
-                        
+
                         Spacer()
                     }
                 }
             }
             .navigationTitle("Scan Receipt")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                FirebaseAnalyticsManager.shared.logScreenView(screenName: "ScanReceipt")
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") { dismiss() }
                 }
-                
+
                 if viewModel.extractedExpense != nil {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Save") {
                             viewModel.saveExpense()
-                            FirebaseAnalyticsManager.shared.logReceiptScanned(success: true)
                             dismiss()
                         }
                         .fontWeight(.semibold)
@@ -86,7 +82,7 @@ struct ScanReceiptView: View {
             }
         }
     }
-    
+
     private func extractedExpenseCard(_ expense: ExtractedExpense) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -95,19 +91,19 @@ struct ScanReceiptView: View {
                 Text("Expense Extracted")
                     .font(.headline)
             }
-            
+
             Divider()
-            
+
             expenseRow("Merchant", expense.merchant)
             expenseRow("Date", expense.date)
             expenseRow("Total", expense.formattedTotal)
-            
+
             if !expense.items.isEmpty {
                 Divider()
                 Text("Items")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                
+
                 ForEach(expense.items, id: \.description) { item in
                     HStack {
                         Text(item.description)
@@ -122,7 +118,7 @@ struct ScanReceiptView: View {
         .background(Color(.secondarySystemBackground))
         .cornerRadius(12)
     }
-    
+
     private func expenseRow(_ label: String, _ value: String) -> some View {
         HStack {
             Text(label)
@@ -136,26 +132,26 @@ struct ScanReceiptView: View {
 
 struct ReceiptScannerView: UIViewControllerRepresentable {
     @ObservedObject var viewModel: ScanReceiptViewModel
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(viewModel: viewModel)
     }
-    
+
     func makeUIViewController(context: Context) -> VNDocumentCameraViewController {
         let scanner = VNDocumentCameraViewController()
         scanner.delegate = context.coordinator
         return scanner
     }
-    
+
     func updateUIViewController(_ uiViewController: VNDocumentCameraViewController, context: Context) {}
-    
+
     class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         let viewModel: ScanReceiptViewModel
-        
+
         init(viewModel: ScanReceiptViewModel) {
             self.viewModel = viewModel
         }
-        
+
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             Task { @MainActor in
                 if scan.pageCount > 0 {
@@ -165,7 +161,7 @@ struct ReceiptScannerView: UIViewControllerRepresentable {
                 }
             }
         }
-        
+
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
             Task { @MainActor in
                 viewModel.showScanner = false
@@ -179,7 +175,7 @@ struct ExtractedExpense {
     var date: String
     var total: Double
     var items: [ExpenseItem]
-    
+
     var formattedTotal: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -190,7 +186,7 @@ struct ExtractedExpense {
 struct ExpenseItem {
     var description: String
     var price: Double
-    
+
     var formattedPrice: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -200,5 +196,5 @@ struct ExpenseItem {
 
 #Preview {
     ScanReceiptView()
-        .environmentObject(InvoiceAppState())
+        .environmentObject(AppState())
 }

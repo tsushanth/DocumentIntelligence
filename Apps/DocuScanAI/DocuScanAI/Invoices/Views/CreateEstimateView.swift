@@ -4,26 +4,21 @@ struct CreateEstimateView: View {
 
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = CreateEstimateViewModel()
-    @EnvironmentObject var appState: InvoiceAppState
+    @EnvironmentObject var appState: AppState
     @State private var showingAddItem = false
     @State private var editingItemIndex: Int?
 
     var body: some View {
         NavigationStack {
             Form {
-                // Client Section
                 Section("Client") {
-                    NavigationLink(destination: SelectClientView(selectedClient: $viewModel.selectedClient)) {
-                        HStack {
-                            Text("Client")
-                            Spacer()
-                            Text(viewModel.selectedClient?.name ?? "Select")
-                                .foregroundColor(.secondary)
-                        }
-                    }
+                    TextField("Client Name", text: $viewModel.clientName)
+                    TextField("Client Email", text: $viewModel.clientEmail)
+                        .keyboardType(.emailAddress)
+                        .textContentType(.emailAddress)
+                        .autocapitalization(.none)
                 }
 
-                // Estimate Details
                 Section("Estimate Details") {
                     TextField("Estimate Number", text: $viewModel.estimateNumber)
 
@@ -32,7 +27,6 @@ struct CreateEstimateView: View {
                     DatePicker("Valid Until", selection: $viewModel.validUntil, displayedComponents: .date)
                 }
 
-                // Line Items
                 Section("Items") {
                     ForEach(Array(viewModel.lineItems.enumerated()), id: \.element.id) { index, item in
                         Button(action: { editingItemIndex = index }) {
@@ -47,25 +41,11 @@ struct CreateEstimateView: View {
                     }
                 }
 
-                // Currency Section
-                Section("Currency") {
-                    Picker("Currency", selection: $viewModel.currency) {
-                        ForEach(Currency.popular) { currency in
-                            Text(currency.shortDisplayName).tag(currency)
-                        }
-                        Divider()
-                        ForEach(Currency.allCases.filter { !Currency.popular.contains($0) }.sorted { $0.name < $1.name }) { currency in
-                            Text(currency.displayName).tag(currency)
-                        }
-                    }
-                }
-
-                // Discount Section
                 Section("Discount") {
                     Picker("Discount Type", selection: $viewModel.discountType) {
                         Text("None").tag(Invoice.DiscountType.none)
                         Text("Percentage (%)").tag(Invoice.DiscountType.percentage)
-                        Text("Fixed Amount (\(viewModel.currencySymbol))").tag(Invoice.DiscountType.flatAmount)
+                        Text("Fixed Amount ($)").tag(Invoice.DiscountType.flatAmount)
                     }
 
                     if viewModel.discountType != .none {
@@ -73,7 +53,7 @@ struct CreateEstimateView: View {
                             Text(viewModel.discountType == .percentage ? "Percentage" : "Amount")
                             Spacer()
                             if viewModel.discountType == .flatAmount {
-                                Text(viewModel.currencySymbol)
+                                Text("$")
                                     .foregroundColor(.secondary)
                             }
                             TextField("0", value: $viewModel.discountValue, format: .number)
@@ -88,7 +68,6 @@ struct CreateEstimateView: View {
                     }
                 }
 
-                // Tax Section
                 Section("Tax") {
                     HStack {
                         Text("Tax Rate")
@@ -102,7 +81,6 @@ struct CreateEstimateView: View {
                     }
                 }
 
-                // Summary
                 Section("Summary") {
                     HStack {
                         Text("Subtotal")
@@ -137,8 +115,7 @@ struct CreateEstimateView: View {
                     }
                 }
 
-                // Template Selection
-                Section("Estimate Template") {
+                Section("Template") {
                     Picker("Style", selection: $viewModel.templateStyle) {
                         ForEach(Invoice.InvoiceTemplate.allCases, id: \.self) { template in
                             Text(template.displayName).tag(template)
@@ -147,7 +124,6 @@ struct CreateEstimateView: View {
                     .pickerStyle(.segmented)
                 }
 
-                // Notes
                 Section("Notes") {
                     TextEditor(text: $viewModel.notes)
                         .frame(height: 80)
@@ -155,9 +131,6 @@ struct CreateEstimateView: View {
             }
             .navigationTitle("New Estimate")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                FirebaseAnalyticsManager.shared.logScreenView(screenName: "CreateEstimate")
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") { dismiss() }
@@ -165,10 +138,6 @@ struct CreateEstimateView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Create") {
                         viewModel.createEstimate()
-                        FirebaseAnalyticsManager.shared.logEstimateCreated(
-                            estimateId: viewModel.estimateNumber,
-                            amount: viewModel.total
-                        )
                         dismiss()
                     }
                     .fontWeight(.semibold)
@@ -210,7 +179,7 @@ struct EstimateLineItemRow: View {
                 .font(.body)
 
             HStack {
-                Text("\(item.quantity, specifier: "%.0f") × \(item.formattedUnitPrice)")
+                Text("\(item.quantity, specifier: "%.0f") x \(item.formattedUnitPrice)")
                     .font(.caption)
                     .foregroundColor(.secondary)
 
@@ -354,5 +323,5 @@ struct EstimateEditLineItemSheet: View {
 
 #Preview {
     CreateEstimateView()
-        .environmentObject(InvoiceAppState())
+        .environmentObject(AppState())
 }

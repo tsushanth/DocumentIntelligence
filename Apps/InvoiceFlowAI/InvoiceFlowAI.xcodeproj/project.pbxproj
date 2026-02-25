@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		ASSETS001BUILDFILE00001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSETS001FILEREF00001 /* Assets.xcassets */; };
 		STOREKIT01BUILDFILE001 /* InvoiceFlowProducts.storekit in Resources */ = {isa = PBXBuildFile; fileRef = STOREKIT01FILEREF0001 /* InvoiceFlowProducts.storekit */; };
+		FIREBASE01BUILDFILE001 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FIREBASE01PRODREF0001 /* FirebaseAnalytics */; };
+		FIREBASEAM01BUILDFILE /* FirebaseAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FIREBASEAM01FILEREF01 /* FirebaseAnalyticsManager.swift */; };
 		0186FBF11870E68862E9C67C /* CreateEstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B3C2F6CD6AB4E7D5316271 /* CreateEstimateView.swift */; };
 		17BBDE4F854F69A40F3A0974 /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEE6B8537DDFB4C0F6A12B5 /* InvoiceDetailView.swift */; };
 		18CEC2BBC61430DDE0D12735 /* ExportDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1339EDC12F8D2876F38132F /* ExportDataView.swift */; };
@@ -81,6 +83,7 @@
 		D49759415C91A2E7EB7B9FF0 /* InvoiceFlowAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceFlowAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8510C26F7900243368DA045 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		EEEE6B8537DDFB4C0F6A12B5 /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
+		FIREBASEAM01FILEREF01 /* FirebaseAnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78B1DDCDA9188D6C55728E96 /* DocumentCore in Frameworks */,
+				FIREBASE01BUILDFILE001 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +170,7 @@
 				4894715924E47BA085B08E1A /* ClientPortalGenerator.swift */,
 				C4069AE1DB9B0C82779B0DCD /* CSVExporter.swift */,
 				36927CD0140735828F2567A4 /* CloudSyncManager.swift */,
+				FIREBASEAM01FILEREF01 /* FirebaseAnalyticsManager.swift */,
 			);
 			name = Utilities;
 			path = Utilities;
@@ -233,6 +238,7 @@
 			name = InvoiceFlowAI;
 			packageProductDependencies = (
 				21CB0F951D5F103FDFF0B2A6 /* DocumentCore */,
+				FIREBASE01PRODREF0001 /* FirebaseAnalytics */,
 			);
 			productName = InvoiceFlowAI;
 			productReference = D49759415C91A2E7EB7B9FF0 /* InvoiceFlowAI.app */;
@@ -264,6 +270,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				830738D6A63E584D70559937 /* XCLocalSwiftPackageReference "DocumentCore" */,
+				FIREBASE01PKGREF00001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A987138DD209B52C00DD6E74 /* Products */;
 			projectDirPath = "";
@@ -310,6 +317,7 @@
 				36A07A2F144EFDB245F4DB48 /* SignatureView.swift in Sources */,
 				8087D643C4E547500EDD87E9 /* CloudSyncSettingsView.swift in Sources */,
 				CA976D70720B1B249717DE7A /* CloudSyncManager.swift in Sources */,
+				FIREBASEAM01BUILDFILE /* FirebaseAnalyticsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,10 +519,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		FIREBASE01PKGREF00001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		21CB0F951D5F103FDFF0B2A6 /* DocumentCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DocumentCore;
+		};
+		FIREBASE01PRODREF0001 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FIREBASE01PKGREF00001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
