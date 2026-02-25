@@ -1,5 +1,6 @@
 import UIKit
 import Vision
+import CoreImage.CIFilterBuiltins
 
 /// Detects document edges in images using Vision framework
 public final class EdgeDetector {

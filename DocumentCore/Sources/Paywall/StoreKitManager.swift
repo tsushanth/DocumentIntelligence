@@ -137,10 +137,11 @@ public final class StoreKitManager: ObservableObject {
     // MARK: - Transaction Updates
 
     private func listenForTransactions() -> Task<Void, Error> {
-        return Task.detached {
+        return Task.detached { [weak self] in
             for await result in Transaction.updates {
+                guard let self else { continue }
                 do {
-                    let transaction = try self.checkVerified(result)
+                    let transaction = try await MainActor.run { try self.checkVerified(result) }
                     await self.updateSubscriptionStatus()
                     await transaction.finish()
                 } catch {
@@ -152,8 +153,8 @@ public final class StoreKitManager: ObservableObject {
 
     // MARK: - Subscription Info
 
-    /// Get subscription status information
-    public func getSubscriptionStatus(for productID: String) async -> Product.SubscriptionInfo.Status? {
+    /// Get subscription renewal state for a product
+    public func getSubscriptionRenewalState(for productID: String) async -> Product.SubscriptionInfo.RenewalState? {
         guard let product = products.first(where: { $0.id == productID }),
               let subscription = product.subscription else {
             return nil
@@ -168,11 +169,11 @@ public final class StoreKitManager: ObservableObject {
 
     /// Check if subscription will renew
     public func willRenew(productID: String) async -> Bool {
-        guard let status = await getSubscriptionStatus(for: productID) else {
+        guard let renewalState = await getSubscriptionRenewalState(for: productID) else {
             return false
         }
 
-        switch status {
+        switch renewalState {
         case .subscribed:
             return true
         default:
