@@ -1,15 +1,18 @@
 import SwiftUI
 
 struct PDFSettingsView: View {
-    
+
     @EnvironmentObject var appState: PDFAppState
+    @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     @State private var showingPaywall = false
-    
+    @State private var showRestoreAlert = false
+    @State private var restoreMessage = ""
+
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    if appState.isProUser {
+                    if subscriptionManager.isPro {
                         HStack {
                             Image(systemName: "star.circle.fill")
                                 .foregroundColor(.yellow)
@@ -20,6 +23,12 @@ struct PDFSettingsView: View {
                                 Text("All features unlocked")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
+                            }
+                        }
+
+                        Button("Manage Subscription") {
+                            if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+                                UIApplication.shared.open(url)
                             }
                         }
                     } else {
@@ -43,7 +52,7 @@ struct PDFSettingsView: View {
                         .foregroundColor(.primary)
                     }
                 }
-                
+
                 Section("General") {
                     NavigationLink(destination: Text("Default View Settings")) {
                         Label("Default View", systemImage: "doc.viewfinder")
@@ -52,107 +61,71 @@ struct PDFSettingsView: View {
                         Label("Export Quality", systemImage: "square.and.arrow.up")
                     }
                 }
-                
-                Section("AI Features") {
-                    NavigationLink(destination: Text("API Settings")) {
-                        Label("OpenAI API Key", systemImage: "key")
-                    }
-                }
-                
+
                 Section("About") {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("1.0.0").foregroundColor(.secondary)
+                    LabeledContent("Version", value: appVersion)
+                    LabeledContent("Build", value: buildNumber)
+
+                    Link(destination: URL(string: "https://kreativekoala.llc/privacy")!) {
+                        HStack {
+                            Label("Privacy Policy", systemImage: "hand.raised")
+                                .foregroundStyle(.primary)
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
-                    NavigationLink(destination: Text("Privacy")) {
-                        Label("Privacy Policy", systemImage: "hand.raised")
+
+                    Link(destination: URL(string: "https://kreativekoala.llc/terms")!) {
+                        HStack {
+                            Label("Terms of Use (EULA)", systemImage: "doc.text")
+                                .foregroundStyle(.primary)
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
-                    NavigationLink(destination: Text("Terms")) {
-                        Label("Terms of Service", systemImage: "doc.text")
-                    }
-                    Button(action: {}) {
+
+                    Button {
+                        Task {
+                            do {
+                                try await subscriptionManager.restorePurchases()
+                                if subscriptionManager.isPro {
+                                    restoreMessage = "Your purchases have been restored successfully!"
+                                } else {
+                                    restoreMessage = "No previous purchases found."
+                                }
+                                showRestoreAlert = true
+                            } catch {
+                                restoreMessage = "Failed to restore purchases."
+                                showRestoreAlert = true
+                            }
+                        }
+                    } label: {
                         Label("Restore Purchases", systemImage: "arrow.clockwise")
                     }
                 }
             }
             .navigationTitle("Settings")
             .sheet(isPresented: $showingPaywall) {
-                PDFGeniusPaywallView()
+                PaywallView()
+            }
+            .alert("Restore Purchases", isPresented: $showRestoreAlert) {
+                Button("OK") { showRestoreAlert = false }
+            } message: {
+                Text(restoreMessage)
             }
         }
     }
-}
 
-struct PDFGeniusPaywallView: View {
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 24) {
-                    VStack(spacing: 12) {
-                        Image(systemName: "doc.fill")
-                            .font(.system(size: 70))
-                            .foregroundStyle(.purple)
-                        Text("PDFGenius Pro")
-                            .font(.title.bold())
-                        Text("Edit PDFs like a pro")
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 40)
-                    
-                    VStack(alignment: .leading, spacing: 16) {
-                        proFeature("signature", "Add Signatures", "Sign documents digitally")
-                        proFeature("doc.on.doc", "Merge & Split", "Combine or separate PDFs")
-                        proFeature("sparkles", "AI Analysis", "Understand contracts instantly")
-                        proFeature("lock.fill", "Password Protect", "Secure sensitive documents")
-                        proFeature("doc.text.viewfinder", "Advanced OCR", "Extract text from any PDF")
-                    }
-                    .padding(.horizontal, 24)
-                    
-                    VStack(spacing: 8) {
-                        Text("$5.99/month")
-                            .font(.title2.bold())
-                        Text("Cancel anytime")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top)
-                    
-                    Button(action: {}) {
-                        Text("Subscribe Now")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.purple)
-                            .cornerRadius(12)
-                    }
-                    .padding(.horizontal, 24)
-                    
-                    Spacer(minLength: 40)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Close") { dismiss() }
-                }
-            }
-        }
+    private var appVersion: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
     }
-    
-    private func proFeature(_ icon: String, _ title: String, _ desc: String) -> some View {
-        HStack(alignment: .top, spacing: 16) {
-            Image(systemName: icon)
-                .font(.title2)
-                .foregroundColor(.purple)
-                .frame(width: 30)
-            VStack(alignment: .leading, spacing: 4) {
-                Text(title).font(.headline)
-                Text(desc).font(.subheadline).foregroundColor(.secondary)
-            }
-        }
+
+    private var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
     }
 }
 

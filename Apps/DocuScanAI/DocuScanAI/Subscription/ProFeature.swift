@@ -9,7 +9,6 @@ enum ProFeature: String, CaseIterable, Identifiable {
     case fieldExtraction = "field_extraction"
     case askAI = "ask_ai"
     case searchInDocuments = "search_documents"
-    case noWatermark = "no_watermark"
     case cloudSync = "cloud_sync"
 
     var id: String { rawValue }
@@ -22,7 +21,6 @@ enum ProFeature: String, CaseIterable, Identifiable {
         case .fieldExtraction: return "Extract Key Fields"
         case .askAI: return "Ask AI Questions"
         case .searchInDocuments: return "Search in Documents"
-        case .noWatermark: return "Export Without Watermark"
         case .cloudSync: return "iCloud Sync"
         }
     }
@@ -41,8 +39,6 @@ enum ProFeature: String, CaseIterable, Identifiable {
             return "Ask questions about your documents"
         case .searchInDocuments:
             return "Search text within all your documents"
-        case .noWatermark:
-            return "Export documents without watermarks"
         case .cloudSync:
             return "Sync documents across all your devices"
         }
@@ -56,7 +52,6 @@ enum ProFeature: String, CaseIterable, Identifiable {
         case .fieldExtraction: return "list.bullet.rectangle"
         case .askAI: return "bubble.left.and.bubble.right"
         case .searchInDocuments: return "doc.text.magnifyingglass"
-        case .noWatermark: return "checkmark.seal"
         case .cloudSync: return "icloud"
         }
     }
@@ -69,7 +64,6 @@ enum ProFeature: String, CaseIterable, Identifiable {
         case .fieldExtraction: return .orange
         case .askAI: return .indigo
         case .searchInDocuments: return .cyan
-        case .noWatermark: return .mint
         case .cloudSync: return .pink
         }
     }

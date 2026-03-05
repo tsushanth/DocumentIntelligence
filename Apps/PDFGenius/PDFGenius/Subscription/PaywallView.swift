@@ -3,11 +3,11 @@ import RevenueCat
 
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var subscriptionManager = SubscriptionManager.shared
+    @ObservedObject private var manager = SubscriptionManager.shared
     @State private var selectedPackage: Package?
     @State private var isPurchasing = false
-    @State private var showError = false
-    @State private var localErrorMessage: String?
+    @State private var showRestoreAlert = false
+    @State private var restoreMessage = ""
 
     let feature: ProFeature?
 
@@ -15,60 +15,61 @@ struct PaywallView: View {
         self.feature = feature
     }
 
+    private var proFeatures: [(icon: String, title: String, description: String)] {
+        [
+            ("doc.on.doc.fill", "Merge & Split PDFs", "Combine multiple PDFs into one or extract specific pages"),
+            ("arrow.down.doc.fill", "Compress PDFs", "Reduce file size while maintaining quality"),
+            ("photo.on.rectangle", "Convert to Images", "Export PDF pages as high-quality images"),
+            ("lock.fill", "Password Protection", "Secure sensitive documents with encryption"),
+            ("doc.text.viewfinder", "OCR Text Extraction", "Extract text from scanned PDFs using AI recognition"),
+            ("signature", "Digital Signatures", "Create and place signatures on documents"),
+            ("pencil.tip", "Drawing & Annotations", "Draw, highlight, and annotate documents"),
+            ("sparkles", "AI Document Analysis", "Get summaries, contract analysis, and ask questions about your PDFs"),
+            ("checkmark.seal.fill", "No Watermarks", "Export documents without any watermarks"),
+        ]
+    }
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header
                     headerSection
-
-                    // Feature highlight if triggered by specific feature
-                    if let feature = feature {
-                        featureHighlight(feature)
-                    }
-
-                    // Features list
                     featuresSection
-
-                    // Pricing options
-                    pricingSection
-
-                    // Purchase button
+                    plansSection
                     purchaseButton
-
-                    // Restore & Terms
-                    footerSection
+                    restoreSection
+                    legalSection
                 }
                 .padding()
             }
-            .background(
-                LinearGradient(
-                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05), Color.white],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-            )
+            .background(Color(.systemGroupedBackground))
+            .navigationTitle("Upgrade to Pro")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.secondary)
                             .font(.title2)
-                            .foregroundStyle(.gray.opacity(0.5))
                     }
                 }
             }
-            .alert("Error", isPresented: $showError) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(localErrorMessage ?? subscriptionManager.errorMessage ?? "An error occurred")
+            .task {
+                if manager.offerings == nil {
+                    await manager.loadOfferings()
+                }
+                // Auto-select annual as best value
+                selectedPackage = manager.annualPackage ?? manager.monthlyPackage
             }
-            .onAppear {
-                // Pre-select annual as best value
-                selectedPackage = subscriptionManager.annualPackage
+            .onChange(of: manager.isPro) { isPro in
+                if isPro { dismiss() }
+            }
+            .alert("Restore Purchases", isPresented: $showRestoreAlert) {
+                Button("OK") { showRestoreAlert = false }
+            } message: {
+                Text(restoreMessage)
             }
         }
     }
@@ -76,214 +77,220 @@ struct PaywallView: View {
     // MARK: - Header
 
     private var headerSection: some View {
-        VStack(spacing: 16) {
-            // Crown icon with gradient
-            ZStack {
-                Circle()
-                    .fill(
-                        LinearGradient(
-                            colors: [.purple, .pink],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(width: 80, height: 80)
+        VStack(spacing: 12) {
+            Image(systemName: "doc.richtext.fill")
+                .font(.system(size: 60))
+                .foregroundStyle(
+                    LinearGradient(colors: [.purple, .blue], startPoint: .top, endPoint: .bottom)
+                )
+                .shadow(color: .purple.opacity(0.3), radius: 10, y: 5)
 
-                Image(systemName: "crown.fill")
-                    .font(.system(size: 36))
-                    .foregroundColor(.white)
-            }
+            Text("All-in-One PDF Pro")
+                .font(.title.bold())
 
-            Text("Upgrade to Pro")
-                .font(.largeTitle.bold())
-
-            Text("Unlock all features and supercharge your PDF workflow")
+            Text("Unlock every PDF tool and remove all limitations")
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal)
         }
-        .padding(.top, 20)
+        .padding(.top)
     }
 
-    // MARK: - Feature Highlight
-
-    private func featureHighlight(_ feature: ProFeature) -> some View {
-        HStack(spacing: 12) {
-            Image(systemName: feature.icon)
-                .font(.title2)
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-                .background(feature.color)
-                .cornerRadius(10)
-
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Unlock \(feature.displayName)")
-                    .font(.headline)
-                Text(feature.description)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
-            Spacer()
-        }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(12)
-    }
-
-    // MARK: - Features Section
+    // MARK: - Features
 
     private var featuresSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Everything in Pro")
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Everything You Get")
                 .font(.headline)
-                .padding(.leading, 4)
+                .padding(.horizontal, 4)
 
-            LazyVGrid(columns: [
-                GridItem(.flexible()),
-                GridItem(.flexible())
-            ], spacing: 12) {
-                ForEach(ProFeature.allCases) { feature in
-                    HStack(spacing: 8) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                            .font(.subheadline)
+            VStack(spacing: 12) {
+                ForEach(proFeatures, id: \.title) { feature in
+                    HStack(spacing: 12) {
+                        Image(systemName: feature.icon)
+                            .font(.title3)
+                            .foregroundStyle(.purple)
+                            .frame(width: 32)
 
-                        Text(feature.displayName)
-                            .font(.subheadline)
-                            .lineLimit(1)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(feature.title)
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            Text(feature.description)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
 
                         Spacer()
+
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
                     }
                 }
             }
+            .padding()
+            .background(Color(.systemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(12)
     }
 
-    // MARK: - Pricing Section
+    // MARK: - Plans
 
-    @State private var selectedMockOption: MockPricingOption = .annual
+    private var plansSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Choose Your Plan")
+                .font(.headline)
+                .padding(.horizontal, 4)
 
-    private var hasPackages: Bool {
-        subscriptionManager.monthlyPackage != nil ||
-        subscriptionManager.annualPackage != nil ||
-        subscriptionManager.lifetimePackage != nil
-    }
-
-    private var pricingSection: some View {
-        VStack(spacing: 12) {
-            if subscriptionManager.isLoading {
-                ProgressView()
-                    .padding()
-            } else if hasPackages {
-                // Annual - Best Value
-                if let annual = subscriptionManager.annualPackage {
-                    PricingOptionView(
-                        package: annual,
-                        isSelected: selectedPackage?.identifier == annual.identifier,
-                        badge: "BEST VALUE",
-                        subtitle: "\(annual.pricePerMonth)/month",
-                        savings: subscriptionManager.annualSavingsPercent
-                    ) {
-                        selectedPackage = annual
-                    }
+            if manager.isLoading && manager.offerings == nil {
+                HStack {
+                    Spacer()
+                    ProgressView().padding()
+                    Spacer()
                 }
-
-                // Monthly
-                if let monthly = subscriptionManager.monthlyPackage {
-                    PricingOptionView(
-                        package: monthly,
-                        isSelected: selectedPackage?.identifier == monthly.identifier,
-                        badge: nil,
-                        subtitle: "Billed monthly",
-                        savings: nil
-                    ) {
-                        selectedPackage = monthly
-                    }
-                }
-
-                // Lifetime
-                if let lifetime = subscriptionManager.lifetimePackage {
-                    PricingOptionView(
-                        package: lifetime,
-                        isSelected: selectedPackage?.identifier == lifetime.identifier,
-                        badge: "ONE TIME",
-                        subtitle: "Pay once, own forever",
-                        savings: nil
-                    ) {
-                        selectedPackage = lifetime
-                    }
-                }
+                .frame(height: 150)
+                .background(Color(.systemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             } else {
-                // Show mock pricing for testing/preview
-                mockPricingSection
+                VStack(spacing: 12) {
+                    if let lifetime = manager.lifetimePackage {
+                        planOption(
+                            package: lifetime,
+                            title: "Pro Lifetime",
+                            subtitle: "One-time purchase, yours forever",
+                            badge: nil
+                        )
+                    }
+
+                    if let annual = manager.annualPackage {
+                        planOption(
+                            package: annual,
+                            title: "Pro Annual",
+                            subtitle: annualSubtitle(annual),
+                            badge: "Best Value"
+                        )
+                    }
+
+                    if let monthly = manager.monthlyPackage {
+                        planOption(
+                            package: monthly,
+                            title: "Pro Monthly",
+                            subtitle: monthlySubtitle(monthly),
+                            badge: nil
+                        )
+                    }
+                }
             }
         }
     }
 
-    // Mock pricing for local testing when RevenueCat isn't configured
-    private var mockPricingSection: some View {
-        VStack(spacing: 12) {
-            MockPricingOptionView(
-                option: .annual,
-                isSelected: selectedMockOption == .annual,
-                badge: "BEST VALUE",
-                subtitle: "$3.33/month",
-                savings: 58
-            ) {
-                selectedMockOption = .annual
+    private func annualSubtitle(_ package: Package) -> String {
+        let monthlyPrice = package.pricePerMonth
+        var subtitle = "\(monthlyPrice)/mo"
+        if let trial = package.storeProduct.introductoryDiscount,
+           trial.paymentMode == .freeTrial {
+            let days = trial.subscriptionPeriod.value
+            let unit = trial.subscriptionPeriod.unit
+            let trialText: String
+            switch unit {
+            case .day: trialText = "\(days) day"
+            case .week: trialText = "\(days) week"
+            default: trialText = "\(days) day"
             }
-
-            MockPricingOptionView(
-                option: .monthly,
-                isSelected: selectedMockOption == .monthly,
-                badge: nil,
-                subtitle: "Billed monthly",
-                savings: nil
-            ) {
-                selectedMockOption = .monthly
-            }
-
-            MockPricingOptionView(
-                option: .lifetime,
-                isSelected: selectedMockOption == .lifetime,
-                badge: "ONE TIME",
-                subtitle: "Pay once, own forever",
-                savings: nil
-            ) {
-                selectedMockOption = .lifetime
-            }
+            subtitle = "Start your \(trialText) free trial, then \(package.localizedPriceString)/yr (\(monthlyPrice)/mo)"
+        } else {
+            subtitle = "\(package.localizedPriceString)/yr (\(monthlyPrice)/mo)"
         }
+        return subtitle
+    }
+
+    private func monthlySubtitle(_ package: Package) -> String {
+        if let trial = package.storeProduct.introductoryDiscount,
+           trial.paymentMode == .freeTrial {
+            let days = trial.subscriptionPeriod.value
+            let unit = trial.subscriptionPeriod.unit
+            let trialText: String
+            switch unit {
+            case .day: trialText = "\(days) day"
+            case .week: trialText = "\(days) week"
+            default: trialText = "\(days) day"
+            }
+            return "Start your \(trialText) free trial, then \(package.localizedPriceString)/mo"
+        }
+        return "\(package.localizedPriceString)/mo, cancel anytime"
+    }
+
+    private func planOption(package: Package, title: String, subtitle: String, badge: String?) -> some View {
+        Button {
+            withAnimation(.spring(response: 0.3)) {
+                selectedPackage = package
+            }
+        } label: {
+            let isSelected = selectedPackage?.identifier == package.identifier
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text(title)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+
+                        if let badge = badge {
+                            Text(badge)
+                                .font(.caption2.bold())
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Color.green)
+                                .clipShape(Capsule())
+                        }
+                    }
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Text(package.localizedPriceString)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .font(.title2)
+                    .foregroundStyle(isSelected ? .purple : .secondary)
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.systemBackground))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(isSelected ? Color.purple : .clear, lineWidth: 2)
+                    )
+            )
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Purchase Button
 
-    private var canPurchase: Bool {
-        if hasPackages {
-            return selectedPackage != nil
-        } else {
-            // Mock mode - always allow button to be active for UI testing
-            return true
-        }
-    }
-
     private var purchaseButton: some View {
         Button {
-            if hasPackages {
-                purchase()
-            } else {
-                // Mock purchase - just show alert or dismiss for testing
-                mockPurchase()
+            Task {
+                guard let package = selectedPackage else { return }
+                isPurchasing = true
+                defer { isPurchasing = false }
+                do {
+                    let success = try await manager.purchase(package)
+                    if success { dismiss() }
+                } catch {
+                    // Error handled by SubscriptionManager
+                }
             }
         } label: {
             HStack {
                 if isPurchasing {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    ProgressView().tint(.white)
                 } else {
                     Text("Continue")
                         .fontWeight(.semibold)
@@ -292,182 +299,59 @@ struct PaywallView: View {
             .frame(maxWidth: .infinity)
             .padding()
             .background(
-                LinearGradient(
-                    colors: [.purple, .pink],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
+                LinearGradient(colors: [.purple, .blue], startPoint: .leading, endPoint: .trailing)
             )
-            .foregroundColor(.white)
-            .cornerRadius(14)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
-        .disabled(!canPurchase || isPurchasing)
-        .opacity(canPurchase ? 1 : 0.6)
+        .disabled(selectedPackage == nil || isPurchasing)
     }
 
-    // MARK: - Footer
+    // MARK: - Restore
 
-    private var footerSection: some View {
-        VStack(spacing: 12) {
-            Button("Restore Purchases") {
-                restore()
+    private var restoreSection: some View {
+        Button {
+            Task {
+                do {
+                    try await manager.restorePurchases()
+                    if manager.isPro {
+                        restoreMessage = "Your purchases have been restored successfully!"
+                        showRestoreAlert = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { dismiss() }
+                    } else {
+                        restoreMessage = "No previous purchases found."
+                        showRestoreAlert = true
+                    }
+                } catch {
+                    restoreMessage = "Failed to restore purchases. Please try again."
+                    showRestoreAlert = true
+                }
             }
-            .font(.subheadline)
-            .foregroundColor(.purple)
+        } label: {
+            Text("Restore Purchases")
+                .font(.subheadline)
+                .foregroundStyle(.blue)
+        }
+    }
+
+    // MARK: - Legal
+
+    private var legalSection: some View {
+        VStack(spacing: 8) {
+            Text("Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. Manage subscriptions in Settings.")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
 
             HStack(spacing: 16) {
                 Link("Terms of Use", destination: URL(string: "https://kreativekoala.llc/terms")!)
-                Text("•")
+                    .font(.caption)
+                Text("•").foregroundStyle(.secondary)
                 Link("Privacy Policy", destination: URL(string: "https://kreativekoala.llc/privacy")!)
+                    .font(.caption)
             }
-            .font(.caption)
-            .foregroundColor(.secondary)
-
-            Text("Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current period. Manage subscriptions in Settings.")
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
         }
         .padding(.top, 8)
-    }
-
-    // MARK: - Actions
-
-    private func purchase() {
-        guard let package = selectedPackage else { return }
-
-        isPurchasing = true
-
-        Task {
-            do {
-                let success = try await subscriptionManager.purchase(package)
-                if success {
-                    dismiss()
-                }
-            } catch {
-                showError = true
-            }
-            isPurchasing = false
-        }
-    }
-
-    private func mockPurchase() {
-        // For testing/preview - show that purchase would happen
-        // In production, this code path won't be reached since packages will be loaded
-        localErrorMessage = "Products not loaded. Please ensure you're connected to the internet and try again."
-        showError = true
-    }
-
-    private func restore() {
-        isPurchasing = true
-
-        Task {
-            do {
-                try await subscriptionManager.restorePurchases()
-                if subscriptionManager.isPro {
-                    dismiss()
-                }
-            } catch {
-                showError = true
-            }
-            isPurchasing = false
-        }
-    }
-}
-
-// MARK: - Pricing Option View
-
-struct PricingOptionView: View {
-    let package: Package
-    let isSelected: Bool
-    let badge: String?
-    let subtitle: String
-    let savings: Int?
-    let onTap: () -> Void
-
-    var body: some View {
-        Button(action: onTap) {
-            HStack {
-                // Selection indicator
-                ZStack {
-                    Circle()
-                        .stroke(isSelected ? Color.purple : Color.gray.opacity(0.3), lineWidth: 2)
-                        .frame(width: 24, height: 24)
-
-                    if isSelected {
-                        Circle()
-                            .fill(Color.purple)
-                            .frame(width: 16, height: 16)
-                    }
-                }
-
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack {
-                        Text(packageTitle)
-                            .font(.headline)
-
-                        if let badge = badge {
-                            Text(badge)
-                                .font(.caption2.bold())
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(
-                                    LinearGradient(
-                                        colors: [.purple, .pink],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .cornerRadius(4)
-                        }
-
-                        if let savings = savings, savings > 0 {
-                            Text("Save \(savings)%")
-                                .font(.caption2.bold())
-                                .foregroundColor(.green)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.green.opacity(0.15))
-                                .cornerRadius(4)
-                        }
-                    }
-
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                Spacer()
-
-                Text(package.localizedPriceString)
-                    .font(.title3.bold())
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(.secondarySystemBackground))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(isSelected ? Color.purple : Color.clear, lineWidth: 2)
-                    )
-            )
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var packageTitle: String {
-        switch package.packageType {
-        case .monthly:
-            return "Monthly"
-        case .annual:
-            return "Annual"
-        case .lifetime:
-            return "Lifetime"
-        default:
-            return package.storeProduct.localizedTitle
-        }
     }
 }
 
@@ -487,110 +371,6 @@ struct PaywallModifier: ViewModifier {
 extension View {
     func withPaywall() -> some View {
         modifier(PaywallModifier())
-    }
-}
-
-// MARK: - Mock Pricing for Testing
-
-enum MockPricingOption: String {
-    case monthly
-    case annual
-    case lifetime
-
-    var title: String {
-        switch self {
-        case .monthly: return "Monthly"
-        case .annual: return "Annual"
-        case .lifetime: return "Lifetime"
-        }
-    }
-
-    var price: String {
-        switch self {
-        case .monthly: return "$7.99"
-        case .annual: return "$39.99"
-        case .lifetime: return "$79.99"
-        }
-    }
-}
-
-struct MockPricingOptionView: View {
-    let option: MockPricingOption
-    let isSelected: Bool
-    let badge: String?
-    let subtitle: String
-    let savings: Int?
-    let onTap: () -> Void
-
-    var body: some View {
-        Button(action: onTap) {
-            HStack {
-                // Selection indicator
-                ZStack {
-                    Circle()
-                        .stroke(isSelected ? Color.purple : Color.gray.opacity(0.3), lineWidth: 2)
-                        .frame(width: 24, height: 24)
-
-                    if isSelected {
-                        Circle()
-                            .fill(Color.purple)
-                            .frame(width: 16, height: 16)
-                    }
-                }
-
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack {
-                        Text(option.title)
-                            .font(.headline)
-
-                        if let badge = badge {
-                            Text(badge)
-                                .font(.caption2.bold())
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(
-                                    LinearGradient(
-                                        colors: [.purple, .pink],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                )
-                                .cornerRadius(4)
-                        }
-
-                        if let savings = savings, savings > 0 {
-                            Text("Save \(savings)%")
-                                .font(.caption2.bold())
-                                .foregroundColor(.green)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.green.opacity(0.15))
-                                .cornerRadius(4)
-                        }
-                    }
-
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                Spacer()
-
-                Text(option.price)
-                    .font(.title3.bold())
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(.secondarySystemBackground))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(isSelected ? Color.purple : Color.clear, lineWidth: 2)
-                    )
-            )
-        }
-        .buttonStyle(.plain)
     }
 }
 

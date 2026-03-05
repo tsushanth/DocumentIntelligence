@@ -138,6 +138,19 @@ class SubscriptionManager: NSObject, ObservableObject {
             if !result.userCancelled {
                 customerInfo = result.customerInfo
                 updateSubscriptionTier()
+
+                // Track purchase with TikTok
+                TikTokAttribution.shared.trackSubscriptionPurchase(
+                    productId: package.storeProduct.productIdentifier,
+                    price: NSDecimalNumber(decimal: package.storeProduct.price).doubleValue
+                )
+
+                // Track purchase with Firebase (Google Ads)
+                FirebaseTracking.shared.trackSubscriptionPurchase(
+                    productId: package.storeProduct.productIdentifier,
+                    price: NSDecimalNumber(decimal: package.storeProduct.price).doubleValue
+                )
+
                 return true
             }
             return false

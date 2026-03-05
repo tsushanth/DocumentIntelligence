@@ -118,3 +118,11 @@ APIKeys.plist
 .idea/
 *.orig
 .env
+
+# Xcode SPM & Build caches
+SourcePackages/
+*.noindex/
+*.noindex
+SDKStatCaches.noindex/
+ModuleCache.noindex/
+Index.noindex/

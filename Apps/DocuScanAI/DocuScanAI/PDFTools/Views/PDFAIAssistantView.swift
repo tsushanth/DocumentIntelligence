@@ -10,10 +10,26 @@ struct PDFAIAssistantView: View {
     @State private var question = ""
     @State private var answer: String?
     @State private var isProcessing = false
+    @AppStorage("hasConsentedToAIDataSharing") private var hasConsentedToAI = false
+    @State private var showingAIConsent = false
+    @State private var pendingAIAction: (() -> Void)?
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                // AI Data Notice
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "info.circle")
+                        .foregroundColor(.blue)
+                        .font(.caption)
+                    Text("AI features send extracted text to our secure server powered by OpenAI for processing. No images are transmitted.")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                .padding(10)
+                .background(Color(.tertiarySystemBackground))
+                .padding(.horizontal)
+
                 // Tab selector
                 Picker("", selection: $selectedTab) {
                     Text("Summary").tag(0)
@@ -37,6 +53,29 @@ struct PDFAIAssistantView: View {
                     Button("Done") { dismiss() }
                 }
             }
+            .sheet(isPresented: $showingAIConsent) {
+                AIConsentView(
+                    onAccept: {
+                        hasConsentedToAI = true
+                        showingAIConsent = false
+                        pendingAIAction?()
+                        pendingAIAction = nil
+                    },
+                    onDecline: {
+                        showingAIConsent = false
+                        pendingAIAction = nil
+                    }
+                )
+            }
+        }
+    }
+
+    private func requireAIConsent(action: @escaping () -> Void) {
+        if hasConsentedToAI {
+            action()
+        } else {
+            pendingAIAction = action
+            showingAIConsent = true
         }
     }
 
@@ -58,10 +97,12 @@ struct PDFAIAssistantView: View {
                             .foregroundColor(.secondary)
 
                         Button(action: {
-                            Task {
-                                isProcessing = true
-                                await viewModel.generateSummary()
-                                isProcessing = false
+                            requireAIConsent {
+                                Task {
+                                    isProcessing = true
+                                    await viewModel.generateSummary()
+                                    isProcessing = false
+                                }
                             }
                         }) {
                             if isProcessing {
@@ -112,7 +153,11 @@ struct PDFAIAssistantView: View {
                     Text("• No liability cap specified")
                 }
 
-                Button(action: {}) {
+                Button(action: {
+                    requireAIConsent {
+                        // Contract analysis action
+                    }
+                }) {
                     Label("Analyze Contract", systemImage: "sparkles")
                         .font(.headline)
                         .foregroundColor(.white)
@@ -187,14 +232,16 @@ struct PDFAIAssistantView: View {
     }
 
     private func askQuestion() {
-        let q = question
-        question = ""
-        isProcessing = true
+        requireAIConsent {
+            let q = question
+            question = ""
+            isProcessing = true
 
-        Task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            answer = "Based on the document, the answer to '\(q)' is: This appears to be related to the terms outlined in section 3.2..."
-            isProcessing = false
+            Task {
+                try? await Task.sleep(nanoseconds: 1_500_000_000)
+                answer = "Based on the document, the answer to '\(q)' is: This appears to be related to the terms outlined in section 3.2..."
+                isProcessing = false
+            }
         }
     }
 }

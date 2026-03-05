@@ -77,29 +77,20 @@ class ScannerViewModel: ObservableObject {
     
     func generatePDF() async {
         isProcessing = true
-        
-        // Generate PDF from images
-        // Will integrate with PDFGenerator
-        
         isProcessing = false
         showingSaveDialog = true
     }
-    
+
     func saveDocument() async -> ScannedDocument? {
         guard !scannedImages.isEmpty else { return nil }
-        
+
         isProcessing = true
         defer { isProcessing = false }
-        
-        // Create and save document
-        // Will integrate with DocumentStore
-        
-        let document = ScannedDocument(
-            title: documentTitle.isEmpty ? "Scan \(Date().formatted())" : documentTitle,
-            pageCount: scannedImages.count
-        )
-        
+
+        let store = DocumentStore.shared
+        let saved = store.saveScannedDocument(title: documentTitle, images: scannedImages)
+
         clearAll()
-        return document
+        return saved
     }
 }

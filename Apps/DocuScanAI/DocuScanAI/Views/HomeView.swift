@@ -16,7 +16,7 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("Documents")
-            .searchable(text: $searchText, prompt: "Search documents")
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Search documents")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {

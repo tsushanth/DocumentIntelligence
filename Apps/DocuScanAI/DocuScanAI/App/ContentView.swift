@@ -25,6 +25,17 @@ struct ContentView: View {
                 .tag(2)
         }
         .tint(.blue)
+        .modifier(TabBarOnlyModifier())
+    }
+}
+
+private struct TabBarOnlyModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.tabViewStyle(.tabBarOnly)
+        } else {
+            content
+        }
     }
 }
 

@@ -17,17 +17,16 @@ class DocumentDetailViewModel: ObservableObject {
     
     func loadDocument() {
         isLoading = true
-        // Load PDF from storage
-        // Will integrate with DocumentStore
+        pdfDocument = DocumentStore.shared.loadPDF(for: document)
         isLoading = false
     }
-    
+
     func renameDocument() {
         // Show rename dialog
     }
-    
+
     func deleteDocument() {
-        // Delete from storage
+        DocumentStore.shared.deleteDocument(document)
     }
     
     func extractText() async {

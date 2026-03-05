@@ -11,6 +11,8 @@ struct PDFAIAssistantView: View {
     @State private var question = ""
     @State private var answer: String?
     @State private var isProcessing = false
+    @State private var contractResult: ContractAnalysisResult?
+    @State private var contractError: String?
     
     var body: some View {
         NavigationStack {
@@ -91,36 +93,74 @@ struct PDFAIAssistantView: View {
     private var contractTab: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Contract Analysis")
-                    .font(.headline)
-                
-                // Parties
-                analysisSection(title: "Parties", icon: "person.2", color: .blue) {
-                    Text("• Acme Corporation")
-                    Text("• John Doe")
-                }
-                
-                // Key Clauses
-                analysisSection(title: "Key Clauses", icon: "doc.text", color: .orange) {
-                    Text("• Termination clause (Page 5)")
-                    Text("• Payment terms: Net 30 (Page 3)")
-                    Text("• Intellectual Property (Page 7)")
-                }
-                
-                // Potential Risks
-                analysisSection(title: "Potential Risks", icon: "exclamationmark.triangle", color: .red) {
-                    Text("• Broad non-compete clause may limit future opportunities")
-                    Text("• No liability cap specified")
-                }
-                
-                Button(action: {}) {
-                    Label("Analyze Contract", systemImage: "sparkles")
+                if let result = contractResult {
+                    Text("Contract Analysis")
+                        .font(.headline)
+
+                    if !result.parties.isEmpty {
+                        analysisSection(title: "Parties", icon: "person.2", color: .blue) {
+                            ForEach(result.parties, id: \.self) { party in
+                                Text("• \(party)")
+                            }
+                        }
+                    }
+
+                    if !result.keyClauses.isEmpty {
+                        analysisSection(title: "Key Clauses", icon: "doc.text", color: .orange) {
+                            ForEach(result.keyClauses, id: \.self) { clause in
+                                Text("• \(clause)")
+                            }
+                        }
+                    }
+
+                    if !result.risks.isEmpty {
+                        analysisSection(title: "Potential Risks", icon: "exclamationmark.triangle", color: .red) {
+                            ForEach(result.risks, id: \.self) { risk in
+                                Text("• \(risk)")
+                            }
+                        }
+                    }
+                } else if let error = contractError {
+                    Text(error)
+                        .foregroundColor(.secondary)
+                        .padding()
+                } else {
+                    VStack(spacing: 16) {
+                        Image(systemName: "doc.text.magnifyingglass")
+                            .font(.system(size: 50))
+                            .foregroundColor(.purple.opacity(0.5))
+                        Text("Analyze this document for parties, key clauses, and risks")
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+
+                        Button(action: {
+                            Task {
+                                isProcessing = true
+                                if let result = await viewModel.analyzeContract() {
+                                    contractResult = result
+                                } else {
+                                    contractError = "Could not analyze this document."
+                                }
+                                isProcessing = false
+                            }
+                        }) {
+                            if isProcessing {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            } else {
+                                Label("Analyze Contract", systemImage: "sparkles")
+                            }
+                        }
                         .font(.headline)
                         .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
                         .background(Color.purple)
-                        .cornerRadius(12)
+                        .cornerRadius(10)
+                        .disabled(isProcessing)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.top, 60)
                 }
             }
             .padding()
@@ -191,10 +231,9 @@ struct PDFAIAssistantView: View {
         let q = question
         question = ""
         isProcessing = true
-        
+
         Task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            answer = "Based on the document, the answer to '\(q)' is: This appears to be related to the terms outlined in section 3.2..."
+            answer = await viewModel.askQuestion(q)
             isProcessing = false
         }
     }

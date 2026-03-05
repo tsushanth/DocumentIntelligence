@@ -134,6 +134,14 @@ class SubscriptionManager: NSObject, ObservableObject {
             if !result.userCancelled {
                 customerInfo = result.customerInfo
                 updateSubscriptionTier()
+
+                // Track purchase events for attribution
+                let productId = package.storeProduct.productIdentifier
+                let price = package.storeProduct.price
+                let currency = package.storeProduct.currencyCode ?? "USD"
+                let params: [String: Any] = ["product_id": productId, "price": Double(truncating: price as NSNumber), "currency": currency]
+                TikTokHelper.shared.trackEvent("purchase_success", properties: params)
+
                 return true
             }
             return false

@@ -1,12 +1,16 @@
 import SwiftUI
 
 struct PDFToolsView: View {
-    
+
     @State private var showingMerge = false
     @State private var showingSplit = false
     @State private var showingCompress = false
     @State private var showingConvert = false
-    
+    @State private var showingPassword = false
+    @State private var showingOCR = false
+
+    @ObservedObject private var gate = FeatureGate.shared
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -19,7 +23,7 @@ struct PDFToolsView: View {
                     ) {
                         showingMerge = true
                     }
-                    
+
                     toolCard(
                         title: "Split PDF",
                         icon: "scissors",
@@ -28,7 +32,7 @@ struct PDFToolsView: View {
                     ) {
                         showingSplit = true
                     }
-                    
+
                     toolCard(
                         title: "Compress",
                         icon: "arrow.down.doc.fill",
@@ -37,7 +41,7 @@ struct PDFToolsView: View {
                     ) {
                         showingCompress = true
                     }
-                    
+
                     toolCard(
                         title: "Convert",
                         icon: "arrow.triangle.2.circlepath",
@@ -46,29 +50,56 @@ struct PDFToolsView: View {
                     ) {
                         showingConvert = true
                     }
-                    
+
                     toolCard(
                         title: "Password",
                         icon: "lock.fill",
                         color: .red,
                         description: "Protect PDF",
                         isPro: true
-                    ) {}
-                    
+                    ) {
+                        gate.requireFeature(.passwordProtection) {
+                            showingPassword = true
+                        }
+                    }
+
                     toolCard(
                         title: "OCR",
                         icon: "doc.text.viewfinder",
                         color: .indigo,
                         description: "Extract text",
                         isPro: true
-                    ) {}
+                    ) {
+                        gate.requireFeature(.ocrExtraction) {
+                            showingOCR = true
+                        }
+                    }
                 }
                 .padding()
             }
             .navigationTitle("Tools")
+            .sheet(isPresented: $showingMerge) {
+                MergePDFsView()
+            }
+            .sheet(isPresented: $showingSplit) {
+                SplitPDFView()
+            }
+            .sheet(isPresented: $showingCompress) {
+                CompressPDFView()
+            }
+            .sheet(isPresented: $showingConvert) {
+                ConvertPDFView()
+            }
+            .sheet(isPresented: $showingPassword) {
+                PasswordPDFView()
+            }
+            .sheet(isPresented: $showingOCR) {
+                OCRView()
+            }
+            .withPaywall()
         }
     }
-    
+
     private func toolCard(
         title: String,
         icon: String,
@@ -83,7 +114,7 @@ struct PDFToolsView: View {
                     Image(systemName: icon)
                         .font(.system(size: 40))
                         .foregroundColor(color)
-                    
+
                     if isPro {
                         Image(systemName: "star.fill")
                             .font(.caption)
@@ -91,11 +122,11 @@ struct PDFToolsView: View {
                             .offset(x: 10, y: -5)
                     }
                 }
-                
+
                 Text(title)
                     .font(.headline)
                     .foregroundColor(.primary)
-                
+
                 Text(description)
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -104,7 +135,9 @@ struct PDFToolsView: View {
             .padding(.vertical, 24)
             .background(color.opacity(0.1))
             .cornerRadius(16)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
     }
 }
 

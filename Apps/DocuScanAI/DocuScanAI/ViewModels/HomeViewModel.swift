@@ -1,48 +1,44 @@
 import SwiftUI
 import Combine
 
-/// View model for home screen
+/// View model for home screen — observes DocumentStore for persistence
 @MainActor
 class HomeViewModel: ObservableObject {
-    
-    @Published var documents: [ScannedDocument] = []
-    @Published var folders: [DocumentFolder] = []
+
     @Published var newFolderName = ""
-    @Published var isLoading = false
-    
+
+    private let store = DocumentStore.shared
+    private var cancellables = Set<AnyCancellable>()
+
+    var documents: [ScannedDocument] { store.documents }
+    var folders: [DocumentFolder] { store.folders }
+
     init() {
-        loadDocuments()
+        // Forward store changes to trigger view updates
+        store.objectWillChange
+            .sink { [weak self] in self?.objectWillChange.send() }
+            .store(in: &cancellables)
     }
-    
-    func loadDocuments() {
-        // Load from DocumentStore
-        // For now, using sample data
-    }
-    
+
     func createFolder() {
         guard !newFolderName.isEmpty else { return }
-        let folder = DocumentFolder(name: newFolderName)
-        folders.append(folder)
+        store.createFolder(name: newFolderName)
         newFolderName = ""
     }
-    
+
     func deleteDocuments(at offsets: IndexSet) {
-        documents.remove(atOffsets: offsets)
+        store.deleteDocuments(at: offsets)
     }
-    
+
     func deleteFolders(at offsets: IndexSet) {
-        folders.remove(atOffsets: offsets)
+        store.deleteFolders(at: offsets)
     }
-    
+
     func sortByDate() {
-        documents.sort { $0.createdAt > $1.createdAt }
+        store.documents.sort { $0.createdAt > $1.createdAt }
     }
-    
+
     func sortByName() {
-        documents.sort { $0.title < $1.title }
-    }
-    
-    func moveDocument(_ document: ScannedDocument, to folder: DocumentFolder) {
-        // Move document to folder
+        store.documents.sort { $0.title < $1.title }
     }
 }

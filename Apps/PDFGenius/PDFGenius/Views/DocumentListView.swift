@@ -24,6 +24,9 @@ struct DocumentListView: View {
                     }
                 }
             }
+            .onAppear {
+                viewModel.loadDocuments()
+            }
             .fileImporter(
                 isPresented: $showingFilePicker,
                 allowedContentTypes: [.pdf],
@@ -82,26 +85,46 @@ struct DocumentListView: View {
 
 struct PDFDocumentRow: View {
     let document: PDFDocumentItem
-    
+
+    private var badge: (label: String, color: Color, icon: String)? {
+        let t = document.title.lowercased()
+        if t.hasPrefix("merged") { return ("Merged", .blue, "doc.on.doc.fill") }
+        if t.hasPrefix("split") { return ("Split", .orange, "scissors") }
+        if t.contains("compressed") { return ("Compressed", .green, "arrow.down.doc.fill") }
+        if t.contains("protected") { return ("Protected", .red, "lock.fill") }
+        return nil
+    }
+
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: "doc.fill")
+            Image(systemName: badge?.icon ?? "doc.fill")
                 .font(.title)
-                .foregroundColor(.purple)
+                .foregroundColor(badge?.color ?? .purple)
                 .frame(width: 50, height: 65)
-                .background(Color.purple.opacity(0.1))
+                .background((badge?.color ?? .purple).opacity(0.1))
                 .cornerRadius(8)
-            
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(document.title)
                     .font(.body)
                     .lineLimit(2)
-                
-                Text("\(document.pageCount) pages • \(document.formattedSize)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+
+                HStack(spacing: 6) {
+                    if let badge = badge {
+                        Text(badge.label)
+                            .font(.caption2.bold())
+                            .foregroundColor(badge.color)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(badge.color.opacity(0.12))
+                            .cornerRadius(4)
+                    }
+                    Text("\(document.pageCount) pages • \(document.formattedSize)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
             }
-            
+
             Spacer()
         }
         .padding(.vertical, 4)

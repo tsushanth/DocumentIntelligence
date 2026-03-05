@@ -5,9 +5,14 @@ struct FolderDetailView: View {
     let folder: DocumentFolder
     @State private var searchText = ""
     
+    private var folderDocuments: [ScannedDocument] {
+        let store = DocumentStore.shared
+        return store.documents.filter { folder.documentIds.contains($0.id) }
+    }
+
     var body: some View {
         Group {
-            if folder.documents.isEmpty {
+            if folderDocuments.isEmpty {
                 emptyState
             } else {
                 documentList
@@ -34,7 +39,7 @@ struct FolderDetailView: View {
     
     private var documentList: some View {
         List {
-            ForEach(folder.documents) { document in
+            ForEach(folderDocuments) { document in
                 NavigationLink(destination: DocumentDetailView(document: document)) {
                     DocumentRow(document: document)
                 }
