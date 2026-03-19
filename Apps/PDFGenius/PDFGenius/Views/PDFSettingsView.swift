@@ -89,6 +89,15 @@ struct PDFSettingsView: View {
                     }
 
                     Button {
+                        if let url = URL(string: "mailto:support@kreativekoala.llc?subject=All-in-One%20PDF%20Support") {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        Label("Contact Support", systemImage: "envelope")
+                    }
+                    .foregroundColor(.primary)
+
+                    Button {
                         Task {
                             do {
                                 try await subscriptionManager.restorePurchases()
@@ -110,7 +119,7 @@ struct PDFSettingsView: View {
             }
             .navigationTitle("Settings")
             .sheet(isPresented: $showingPaywall) {
-                PaywallView()
+                RemotePaywallView()
             }
             .alert("Restore Purchases", isPresented: $showRestoreAlert) {
                 Button("OK") { showRestoreAlert = false }

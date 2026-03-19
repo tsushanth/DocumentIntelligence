@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		PPG000000000003 /* PaywallKit in Frameworks */ = {isa = PBXBuildFile; productRef = PPG000000000002 /* PaywallKit */; };
 		065DA8CBC5DD0A8CDCCA2860 /* DocumentCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0688D86109C60DFD7A7081DD /* DocumentCore */; };
 		1A2B3C4D5E6F7089A1B2C3D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A3B4C5D6E7F8190A2B3C4D5 /* Assets.xcassets */; };
 		356A5BEC0767D23D18D8E7A7 /* PDFToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FAAED4AF868E61F2950150 /* PDFToolsView.swift */; };
@@ -26,6 +27,7 @@
 		E1F2A3B4C5D6E7F8A9B0C1D2 /* ProFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7089A0B1C2D /* ProFeature.swift */; };
 		E2F3A4B5C6D7E8F9A0B1C2D3 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A3B4C5D6E7F8190A1B2C3D /* SubscriptionManager.swift */; };
 		E3F4A5B6C7D8E9F0A1B2C3D4 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4B5C6D7E8F9201A2B3C4D /* PaywallView.swift */; };
+		AA000099REMOTE00000000001 /* RemotePaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A5B6C7D8E9F0201B2C3D4E /* RemotePaywallView.swift */; };
 		E4F5A6B7C8D9E0F1A2B3C4D5 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = F4A5B6C7D8E9F0312A3B4C5D /* RevenueCat */; };
 		AA000001TOOLS00000000001 /* MergePDFsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001TOOLS00000000001 /* MergePDFsView.swift */; };
 		AA000002TOOLS00000000002 /* SplitPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002TOOLS00000000002 /* SplitPDFView.swift */; };
@@ -33,6 +35,8 @@
 		AA000004TOOLS00000000004 /* ConvertPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000004TOOLS00000000004 /* ConvertPDFView.swift */; };
 		AA000005TOOLS00000000005 /* PasswordPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000005TOOLS00000000005 /* PasswordPDFView.swift */; };
 		AA000006TOOLS00000000006 /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000006TOOLS00000000006 /* OCRView.swift */; };
+		B2D3E4F5A6B7C8D9E0F1A2B3 /* PaywallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C2D3E4F5A6B7C8D9E0F1A2 /* PaywallCoordinator.swift */; };
+		D4F5A6B7C8D9E0F1A2B3C4D5 /* WinbackOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4F5A6B7C8D9E0F1A2B3C4 /* WinbackOfferView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +59,7 @@
 		F1A2B3C4D5E6F7089A0B1C2D /* ProFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProFeature.swift; sourceTree = "<group>"; };
 		F2A3B4C5D6E7F8190A1B2C3D /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		F3A4B5C6D7E8F9201A2B3C4D /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		F4A5B6C7D8E9F0201B2C3D4E /* RemotePaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePaywallView.swift; sourceTree = "<group>"; };
 		F471BD4A600DC847BF7BB4D5 /* PDFEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFEditorViewModel.swift; sourceTree = "<group>"; };
 		BB000001TOOLS00000000001 /* MergePDFsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergePDFsView.swift; sourceTree = "<group>"; };
 		BB000002TOOLS00000000002 /* SplitPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitPDFView.swift; sourceTree = "<group>"; };
@@ -62,6 +67,8 @@
 		BB000004TOOLS00000000004 /* ConvertPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertPDFView.swift; sourceTree = "<group>"; };
 		BB000005TOOLS00000000005 /* PasswordPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordPDFView.swift; sourceTree = "<group>"; };
 		BB000006TOOLS00000000006 /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
+		A1C2D3E4F5A6B7C8D9E0F1A2 /* PaywallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallCoordinator.swift; sourceTree = "<group>"; };
+		C3E4F5A6B7C8D9E0F1A2B3C4 /* WinbackOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinbackOfferView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +80,7 @@
 				E4F5A6B7C8D9E0F1A2B3C4D5 /* RevenueCat in Frameworks */,
 				71470002PDFA436B0084B5E5 /* TikTokBusinessSDK in Frameworks */,
 				ABB7299ACB18CAEE9F1B480F /* RevenueCatUI in Frameworks */,
+				PPG000000000003 /* PaywallKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,9 +140,12 @@
 		A1B2C3D4E5F607089A0B1C2D /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
+				A1C2D3E4F5A6B7C8D9E0F1A2 /* PaywallCoordinator.swift */,
 				F3A4B5C6D7E8F9201A2B3C4D /* PaywallView.swift */,
+				F4A5B6C7D8E9F0201B2C3D4E /* RemotePaywallView.swift */,
 				F1A2B3C4D5E6F7089A0B1C2D /* ProFeature.swift */,
 				F2A3B4C5D6E7F8190A1B2C3D /* SubscriptionManager.swift */,
+				C3E4F5A6B7C8D9E0F1A2B3C4 /* WinbackOfferView.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -204,6 +215,7 @@
 				F4A5B6C7D8E9F0312A3B4C5D /* RevenueCat */,
 				71470001PDFA436B0084B5E5 /* TikTokBusinessSDK */,
 				7172F16C586EE38C122D7815 /* RevenueCatUI */,
+				PPG000000000002 /* PaywallKit */,
 			);
 			productName = PDFGenius;
 			productReference = 5203D15B65F7870C73BE49AD /* PDFGenius.app */;
@@ -237,6 +249,7 @@
 				EFEF723ECD614522B5B57EC4 /* XCLocalSwiftPackageReference "DocumentCore" */,
 				D5E6F7A8B9C0D1E2F3A4B5C6 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				71470000PDFA436B0084B5E4 /* XCRemoteSwiftPackageReference "tiktok-business-ios-sdk" */,
+				PPG000000000001 /* XCLocalSwiftPackageReference "PaywallKit" */,
 			);
 			productRefGroup = BA9657B0A790CFF51D05805D /* Products */;
 			projectDirPath = "";
@@ -277,6 +290,7 @@
 				E1F2A3B4C5D6E7F8A9B0C1D2 /* ProFeature.swift in Sources */,
 				E2F3A4B5C6D7E8F9A0B1C2D3 /* SubscriptionManager.swift in Sources */,
 				E3F4A5B6C7D8E9F0A1B2C3D4 /* PaywallView.swift in Sources */,
+				AA000099REMOTE00000000001 /* RemotePaywallView.swift in Sources */,
 				887A8E9619AFC49205EEF32D /* TikTokHelper.swift in Sources */,
 				AA000001TOOLS00000000001 /* MergePDFsView.swift in Sources */,
 				AA000002TOOLS00000000002 /* SplitPDFView.swift in Sources */,
@@ -284,6 +298,8 @@
 				AA000004TOOLS00000000004 /* ConvertPDFView.swift in Sources */,
 				AA000005TOOLS00000000005 /* PasswordPDFView.swift in Sources */,
 				AA000006TOOLS00000000006 /* OCRView.swift in Sources */,
+				B2D3E4F5A6B7C8D9E0F1A2B3 /* PaywallCoordinator.swift in Sources */,
+				D4F5A6B7C8D9E0F1A2B3C4D5 /* WinbackOfferView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,14 +311,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 7RS696YC75;
 				INFOPLIST_FILE = PDFGenius/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.documentintelligence.pdfgenius;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -314,14 +330,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 7RS696YC75;
 				INFOPLIST_FILE = PDFGenius/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.documentintelligence.pdfgenius;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -479,6 +495,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../DocumentCore;
 		};
+		PPG000000000001 /* XCLocalSwiftPackageReference "PaywallKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../PaywallKit;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -519,6 +539,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D5E6F7A8B9C0D1E2F3A4B5C6 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
+		};
+		PPG000000000002 /* PaywallKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = PPG000000000001 /* XCLocalSwiftPackageReference "PaywallKit" */;
+			productName = PaywallKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -48,6 +48,7 @@ struct PaywallView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
+                        PaywallCoordinator.shared.trackDismiss()
                         dismiss()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
@@ -363,7 +364,7 @@ struct PaywallModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .sheet(isPresented: $gate.showingPaywall) {
-                PaywallView(feature: gate.paywallFeature)
+                RemotePaywallView(triggerSource: gate.paywallFeature?.rawValue ?? "generic")
             }
     }
 }

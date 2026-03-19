@@ -6,6 +6,7 @@ import RevenueCat
 struct PDFGeniusApp: App {
 
     @StateObject private var appState = PDFAppState()
+    @StateObject private var paywallCoordinator = PaywallCoordinator.shared
     @Environment(\.scenePhase) private var scenePhase
     @State private var hasRequestedATT = false
 
@@ -21,10 +22,14 @@ struct PDFGeniusApp: App {
         WindowGroup {
             PDFContentView()
                 .environmentObject(appState)
+                .sheet(isPresented: $paywallCoordinator.showWinbackOffer) {
+                    WinbackOfferView()
+                }
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
                 Task { await appState.checkSubscription() }
+                paywallCoordinator.checkWinbackEligibility()
                 if !hasRequestedATT {
                     hasRequestedATT = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

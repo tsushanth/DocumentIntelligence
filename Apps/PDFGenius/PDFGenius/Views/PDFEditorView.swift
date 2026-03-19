@@ -155,6 +155,7 @@ struct PDFEditableView: UIViewRepresentable {
         pdfView.document = document
         pdfView.autoScales = true
         pdfView.displayMode = .singlePageContinuous
+        pdfView.isUserInteractionEnabled = true
 
         let longPress = UILongPressGestureRecognizer(
             target: context.coordinator,
@@ -165,19 +166,51 @@ struct PDFEditableView: UIViewRepresentable {
         pdfView.addGestureRecognizer(longPress)
         context.coordinator.pdfView = pdfView
 
+        NotificationCenter.default.addObserver(
+            context.coordinator,
+            selector: #selector(Coordinator.selectionDidChange(_:)),
+            name: NSNotification.Name.PDFViewSelectionChanged,
+            object: pdfView
+        )
+
         return pdfView
     }
 
     func updateUIView(_ pdfView: PDFView, context: Context) {
-        pdfView.document = document
+        if pdfView.document !== document {
+            pdfView.document = document
+        }
         context.coordinator.pdfView = pdfView
+        context.coordinator.currentTool = currentTool
+        context.coordinator.viewModel = viewModel
     }
 
     class Coordinator: NSObject, UIGestureRecognizerDelegate {
         weak var pdfView: PDFView?
+        var currentTool: PDFEditorView.EditingTool = .none
+        var viewModel: PDFEditorViewModel?
         private var draggedAnnotation: PDFAnnotation?
         private var draggedPage: PDFPage?
         private var dragOffset: CGPoint = .zero
+
+        @objc func selectionDidChange(_ notification: Notification) {
+            guard let pdfView = pdfView,
+                  let selection = pdfView.currentSelection,
+                  let page = selection.pages.first else { return }
+            let bounds = selection.bounds(for: page)
+            guard bounds != .zero else { return }
+            let vm = viewModel
+            switch currentTool {
+            case .highlight:
+                DispatchQueue.main.async { vm?.addHighlight(at: bounds, on: page) }
+                pdfView.clearSelection()
+            case .underline:
+                DispatchQueue.main.async { vm?.addUnderline(at: bounds, on: page) }
+                pdfView.clearSelection()
+            default:
+                break
+            }
+        }
 
         // Only activate when touching a signature annotation
         func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
