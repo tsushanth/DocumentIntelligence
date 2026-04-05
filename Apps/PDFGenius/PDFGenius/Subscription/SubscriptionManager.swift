@@ -1,11 +1,5 @@
-import RevenueCat
 import SwiftUI
-
-// MARK: - Entitlement IDs
-
-enum EntitlementID: String {
-    case pro = "pro"
-}
+import PaywallKit
 
 // MARK: - Product IDs
 
@@ -21,6 +15,10 @@ enum ProductID: String, CaseIterable {
         case .proLifetime:
             return false
         }
+    }
+
+    static var allIDs: [String] {
+        allCases.map(\.rawValue)
     }
 }
 
@@ -38,262 +36,100 @@ enum SubscriptionTier: String, Codable {
     }
 }
 
-// MARK: - Subscription Manager
+// MARK: - Subscription Manager (StoreKit 2 via PaywallKit)
 
 @MainActor
-class SubscriptionManager: NSObject, ObservableObject {
+class SubscriptionManager: ObservableObject {
     static let shared = SubscriptionManager()
 
-    override init() {
-        super.init()
-        configureRevenueCat()
-    }
-
-    // RevenueCat API Key
-    private static let apiKey = "appl_GtPahdnIplNbumCJhqbsscYRlpj"
-
-    @Published private(set) var offerings: Offerings?
-    @Published private(set) var customerInfo: CustomerInfo?
     @Published private(set) var subscriptionTier: SubscriptionTier = .free
-    @Published private(set) var isLoading = false
-    @Published var errorMessage: String?
 
-    // Current offering packages
-    var currentOffering: Offering? {
-        offerings?.current
+    private let store = StoreManager.shared
+
+    // MARK: - UserDefaults Keys
+
+    private enum UserDefaultsKey {
+        static let subscriptionTier = "com.pdfgenius.subscription.tier"
+        static let subscriptionExpiration = "com.pdfgenius.subscription.expiration"
+        static let lastValidationDate = "com.pdfgenius.validation.date"
     }
 
-    var monthlyPackage: Package? {
-        currentOffering?.package(identifier: "$rc_monthly")
-    }
-
-    var annualPackage: Package? {
-        currentOffering?.package(identifier: "$rc_annual")
-    }
-
-    var lifetimePackage: Package? {
-        currentOffering?.package(identifier: "$rc_lifetime")
-    }
-
-    // MARK: - Configuration
-
-    private func configureRevenueCat() {
-        #if DEBUG
-        Purchases.logLevel = .debug
-        #endif
-
-        Purchases.configure(withAPIKey: Self.apiKey)
-
-        // Enable automatic collection of Apple Search Ads attribution
-        Purchases.shared.attribution.enableAdServicesAttributionTokenCollection()
-
-        // Listen for customer info updates
-        Purchases.shared.delegate = self
-
-        // Initial fetch
-        Task {
-            await loadOfferings()
-            await refreshCustomerInfo()
-        }
-    }
-
-    // MARK: - Load Offerings
-
-    func loadOfferings() async {
-        isLoading = true
-        defer { isLoading = false }
-
-        do {
-            offerings = try await Purchases.shared.offerings()
-        } catch {
-            print("Failed to load offerings: \(error)")
-            errorMessage = "Failed to load products. Please try again."
-        }
-    }
-
-    // MARK: - Refresh Customer Info
-
-    func refreshCustomerInfo() async {
-        do {
-            customerInfo = try await Purchases.shared.customerInfo()
-            updateSubscriptionTier()
-        } catch {
-            print("Failed to fetch customer info: \(error)")
-        }
-    }
-
-    // MARK: - Purchasing
-
-    func purchase(_ package: Package) async throws -> Bool {
-        isLoading = true
-        defer { isLoading = false }
-
-        do {
-            let result = try await Purchases.shared.purchase(package: package)
-
-            if !result.userCancelled {
-                customerInfo = result.customerInfo
-                updateSubscriptionTier()
-
-                // Track purchase events for attribution
-                let productId = package.storeProduct.productIdentifier
-                let price = package.storeProduct.price
-                let currency = package.storeProduct.currencyCode ?? "USD"
-                let params: [String: Any] = ["product_id": productId, "price": Double(truncating: price as NSNumber), "currency": currency]
-                TikTokHelper.shared.trackEvent("purchase_success", properties: params)
-
-                return true
-            }
-            return false
-        } catch {
-            errorMessage = "Purchase failed: \(error.localizedDescription)"
-            throw error
-        }
-    }
-
-    // MARK: - Restore Purchases
-
-    func restorePurchases() async throws {
-        isLoading = true
-        defer { isLoading = false }
-
-        do {
-            customerInfo = try await Purchases.shared.restorePurchases()
-            updateSubscriptionTier()
-        } catch {
-            errorMessage = "Restore failed: \(error.localizedDescription)"
-            throw error
-        }
-    }
-
-    // MARK: - Update Subscription Tier
-
-    private func updateSubscriptionTier() {
-        guard let info = customerInfo else {
-            subscriptionTier = .free
-            return
-        }
-
-        if info.entitlements[EntitlementID.pro.rawValue]?.isActive == true {
-            subscriptionTier = .pro
-        } else {
-            subscriptionTier = .free
-        }
-    }
-
-    // MARK: - Helper Properties
+    // MARK: - Computed Properties
 
     var isPro: Bool {
         subscriptionTier == .pro
     }
 
-    var hasActiveSubscription: Bool {
-        customerInfo?.entitlements.active.isEmpty == false
+    var isLifetime: Bool {
+        store.isLifetime
     }
 
-    // Calculate savings for annual plan
-    var annualSavingsPercent: Int {
-        guard let monthly = monthlyPackage?.storeProduct.price,
-              let annual = annualPackage?.storeProduct.price else { return 0 }
-
-        let monthlyAnnualized = monthly * 12
-        let savings = (monthlyAnnualized - annual) / monthlyAnnualized * 100
-        return Int(truncating: savings as NSNumber)
+    var subscriptionExpirationDate: Date? {
+        store.subscriptionExpirationDate
     }
 
-    // MARK: - User Identification (for attribution)
+    // MARK: - Initialization
 
-    func setUserID(_ userID: String) {
-        Task {
-            do {
-                let (customerInfo, _) = try await Purchases.shared.logIn(userID)
-                self.customerInfo = customerInfo
-                updateSubscriptionTier()
-            } catch {
-                print("Failed to login user: \(error)")
+    private init() {
+        loadPersistedState()
+    }
+
+    // MARK: - Validate Subscription
+
+    func validateSubscriptionState() async {
+        await store.refreshSubscriptionStatus()
+
+        if store.isLifetime || store.isPremium {
+            subscriptionTier = .pro
+        } else {
+            subscriptionTier = .free
+        }
+
+        persistState()
+    }
+
+    /// Convenience alias used by PDFAppState
+    func refreshCustomerInfo() async {
+        await validateSubscriptionState()
+    }
+
+    // MARK: - Restore Purchases
+
+    func restorePurchases() async throws {
+        await store.restore()
+        await validateSubscriptionState()
+    }
+
+    // MARK: - Persistence
+
+    private func loadPersistedState() {
+        let defaults = UserDefaults.standard
+
+        if let tierRaw = defaults.string(forKey: UserDefaultsKey.subscriptionTier),
+           let tier = SubscriptionTier(rawValue: tierRaw) {
+            subscriptionTier = tier
+        }
+
+        if let expirationInterval = defaults.object(forKey: UserDefaultsKey.subscriptionExpiration) as? TimeInterval {
+            let expirationDate = Date(timeIntervalSince1970: expirationInterval)
+            if expirationDate <= Date() {
+                // Subscription expired
+                subscriptionTier = .free
             }
         }
     }
 
-    func logout() {
-        Task {
-            do {
-                customerInfo = try await Purchases.shared.logOut()
-                updateSubscriptionTier()
-            } catch {
-                print("Failed to logout: \(error)")
-            }
-        }
-    }
+    private func persistState() {
+        let defaults = UserDefaults.standard
 
-    // MARK: - Attribution
+        defaults.set(subscriptionTier.rawValue, forKey: UserDefaultsKey.subscriptionTier)
 
-    func setSearchAdsAttribution(_ data: [String: Any]) {
-        // RevenueCat automatically collects Search Ads attribution
-        // This is for additional custom attribution data
-        Purchases.shared.attribution.setAttributes(data.compactMapValues { "\($0)" })
-    }
-
-    func setCampaign(_ campaign: String) {
-        Purchases.shared.attribution.setCampaign(campaign)
-    }
-
-    func setAdGroup(_ adGroup: String) {
-        Purchases.shared.attribution.setAdGroup(adGroup)
-    }
-
-    func setCreative(_ creative: String) {
-        Purchases.shared.attribution.setCreative(creative)
-    }
-
-    func setKeyword(_ keyword: String) {
-        Purchases.shared.attribution.setKeyword(keyword)
-    }
-}
-
-// MARK: - RevenueCat Delegate
-
-extension SubscriptionManager: PurchasesDelegate {
-    nonisolated func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
-        Task { @MainActor in
-            self.customerInfo = customerInfo
-            self.updateSubscriptionTier()
-        }
-    }
-}
-
-// MARK: - Price Formatting Extension
-
-extension Package {
-    var localizedPriceString: String {
-        storeProduct.localizedPriceString
-    }
-
-    var pricePerMonth: String {
-        let price = storeProduct.price
-        let period = storeProduct.subscriptionPeriod
-
-        guard let period = period else {
-            return localizedPriceString
+        if let expirationDate = subscriptionExpirationDate {
+            defaults.set(expirationDate.timeIntervalSince1970, forKey: UserDefaultsKey.subscriptionExpiration)
+        } else {
+            defaults.removeObject(forKey: UserDefaultsKey.subscriptionExpiration)
         }
 
-        let monthlyPrice: Decimal
-        switch period.unit {
-        case .month:
-            monthlyPrice = price / Decimal(period.value)
-        case .year:
-            monthlyPrice = price / Decimal(period.value * 12)
-        case .week:
-            monthlyPrice = price * Decimal(52 / 12) / Decimal(period.value)
-        case .day:
-            monthlyPrice = price * Decimal(365 / 12) / Decimal(period.value)
-        @unknown default:
-            monthlyPrice = price
-        }
-
-        let formatter = storeProduct.priceFormatter ?? NumberFormatter()
-        formatter.numberStyle = .currency
-
-        return formatter.string(from: monthlyPrice as NSNumber) ?? localizedPriceString
+        defaults.set(Date().timeIntervalSince1970, forKey: UserDefaultsKey.lastValidationDate)
     }
 }

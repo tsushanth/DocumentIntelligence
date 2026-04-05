@@ -1,4 +1,7 @@
 import SwiftUI
+#if DEBUG
+import PaywallKit
+#endif
 
 struct PDFSettingsView: View {
 
@@ -18,7 +21,7 @@ struct PDFSettingsView: View {
                                 .foregroundColor(.yellow)
                                 .font(.title2)
                             VStack(alignment: .leading) {
-                                Text("Pro Member")
+                                Text(subscriptionManager.isLifetime ? "Lifetime Pro" : "Pro Member")
                                     .font(.headline)
                                 Text("All features unlocked")
                                     .font(.caption)
@@ -61,6 +64,21 @@ struct PDFSettingsView: View {
                         Label("Export Quality", systemImage: "square.and.arrow.up")
                     }
                 }
+
+                #if DEBUG
+                PaywallDebugView(
+                    appId: "pdfgenius",
+                    appName: "PDFGenius Pro",
+                    features: [
+                        PaywallFeature(icon: "\u{270D}\u{FE0F}", title: "Signatures", description: "Sign documents digitally"),
+                        PaywallFeature(icon: "\u{1F916}", title: "AI Summaries", description: "Summarize any PDF"),
+                        PaywallFeature(icon: "\u{1F4DD}", title: "Annotations", description: "Draw and markup"),
+                        PaywallFeature(icon: "\u{1F504}", title: "Convert Files", description: "PDF to Word and more"),
+                        PaywallFeature(icon: "\u{1F4C1}", title: "Unlimited Documents", description: "No file limits")
+                    ],
+                    theme: PaywallTheme(accent: Color(red: 0.9, green: 0.2, blue: 0.2), accent2: Color(red: 1.0, green: 0.5, blue: 0.0))
+                )
+                #endif
 
                 Section("About") {
                     LabeledContent("Version", value: appVersion)

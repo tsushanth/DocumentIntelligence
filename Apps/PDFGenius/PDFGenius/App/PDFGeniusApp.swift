@@ -1,6 +1,6 @@
 import SwiftUI
 import TikTokBusinessSDK
-import RevenueCat
+import PaywallKit
 
 @main
 struct PDFGeniusApp: App {
@@ -14,8 +14,8 @@ struct PDFGeniusApp: App {
         // Initialize TikTok Events SDK
         TikTokHelper.shared.initialize()
 
-        // Initialize RevenueCat (triggers SubscriptionManager.shared singleton)
-        _ = SubscriptionManager.shared
+        // Configure StoreKit 2 via PaywallKit (replaces RevenueCat)
+        StoreManager.shared.configure(productIds: ProductID.allIDs)
     }
 
     var body: some Scene {
@@ -55,7 +55,7 @@ class PDFAppState: ObservableObject {
 
     @MainActor
     func checkSubscription() async {
-        await subscriptionManager.refreshCustomerInfo()
+        await subscriptionManager.validateSubscriptionState()
         isProUser = subscriptionManager.isPro
     }
 }

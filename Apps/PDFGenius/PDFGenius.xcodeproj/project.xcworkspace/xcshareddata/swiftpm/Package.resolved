@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "purchases-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/RevenueCat/purchases-ios.git",
-      "state" : {
-        "revision" : "2f90e4352f9c2a9254f9e498c9045bfc8d5291e8",
-        "version" : "5.57.0"
-      }
-    },
-    {
       "identity" : "tiktok-business-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tiktok/tiktok-business-ios-sdk",

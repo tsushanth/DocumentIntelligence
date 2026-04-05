@@ -1,0 +1,15 @@
+{
+  "default": {
+    "background": "#F3E5F5",
+    "padding": 50,
+    "show_complete_frame": false,
+    "title": {
+      "font_size": 80,
+      "color": "#7B1FA2"
+    },
+    "keyword": {
+      "font_size": 44,
+      "color": "#7B1FA299"
+    }
+  }
+}
