@@ -9,6 +9,7 @@ struct DocuScanAIApp: App {
     init() {
         FirebaseTracking.shared.configure()
         TikTokAttribution.shared.configure()
+        AttributionService.shared.trackAttribution()
     }
 
     var body: some Scene {

@@ -35,6 +35,8 @@
 		FC03D4E5F6A7B8C9D0E1F2A3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FB02C3D4E5F6A7B8C9D0E1F2 /* FirebaseAnalytics */; };
 		FE05F6A7B8C9D0E1F2A3B4C5 /* FirebaseTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD04E5F6A7B8C9D0E1F2A3B4 /* FirebaseTracking.swift */; };
 		F007B8C9D0E1F2A3B4C5D6E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF06A7B8C9D0E1F2A3B4C5D6 /* GoogleService-Info.plist */; };
+		ATTRSVC0001BUILDFILESRC1 /* AttributionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ATTRSVC0002FILEREFSRC0001 /* AttributionService.swift */; };
+		ATTRSVC0003BUILDFILEFW01 /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ATTRSVC0004FILEREFFW00001 /* AdServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		D4E5F6A7B8C9D0E1F2A3B4C5 /* TikTokAttribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTokAttribution.swift; sourceTree = "<group>"; };
 		FD04E5F6A7B8C9D0E1F2A3B4 /* FirebaseTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTracking.swift; sourceTree = "<group>"; };
 		FF06A7B8C9D0E1F2A3B4C5D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ATTRSVC0002FILEREFSRC0001 /* AttributionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributionService.swift; sourceTree = "<group>"; };
+		ATTRSVC0004FILEREFFW00001 /* AdServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdServices.framework; path = System/Library/Frameworks/AdServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				8F743CDFB4F294A897D2CCA5 /* RevenueCat in Frameworks */,
 				A1C2D3E4F5A6B7C8D9E0F1A2 /* RevenueCatUI in Frameworks */,
 				E5F6A7B8C9D0E1F2A3B4C5D6 /* TikTokBusinessSDK in Frameworks */,
+				ATTRSVC0003BUILDFILEFW01 /* AdServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +90,7 @@
 		0B13AA75ED97B480E2865D0F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				ATTRSVC0002FILEREFSRC0001 /* AttributionService.swift */,
 				F2E1D0C9B8A7F6E5D4C3B2A1 /* DocumentStore.swift */,
 				FD04E5F6A7B8C9D0E1F2A3B4 /* FirebaseTracking.swift */,
 				D4E5F6A7B8C9D0E1F2A3B4C5 /* TikTokAttribution.swift */,
@@ -183,7 +189,16 @@
 				4F2D4562DB0ECC8E699CFA5F /* DocuScanAI */,
 				613FDAADAF3703712C90938C /* Packages */,
 				BE49AD55B3ACDA79F987E4C8 /* Products */,
+				ATTRSVC0005FRAMEWORKSGROUP /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		ATTRSVC0005FRAMEWORKSGROUP /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ATTRSVC0004FILEREFFW00001 /* AdServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +304,7 @@
 				FE05F6A7B8C9D0E1F2A3B4C5 /* FirebaseTracking.swift in Sources */,
 				C3D4E5F6A7B8C9D0E1F2A3B4 /* TikTokAttribution.swift in Sources */,
 				594F3819E5997B7FEA3C23CF /* WatermarkService.swift in Sources */,
+				ATTRSVC0001BUILDFILESRC1 /* AttributionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
