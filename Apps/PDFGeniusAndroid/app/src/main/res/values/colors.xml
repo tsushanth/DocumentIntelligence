@@ -1,0 +1,4 @@
+<resources>
+    <!-- Purple accent, matching iOS PDFContentView's .tint(.purple) -->
+    <color name="purple_primary">#7C3AED</color>
+</resources>
