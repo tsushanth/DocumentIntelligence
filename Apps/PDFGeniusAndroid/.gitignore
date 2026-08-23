@@ -9,3 +9,4 @@ build/
 *.apk
 *.aab
 
+fastlane/report.xml

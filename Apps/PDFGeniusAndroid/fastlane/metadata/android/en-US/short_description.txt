@@ -1,0 +1,1 @@
+Merge, split, compress, and OCR your PDFs — all on-device, all offline.

@@ -1,0 +1,16 @@
+PDFGenius is a straightforward PDF toolkit that works entirely on your device — no account, no cloud upload, no internet connection required to use any tool.
+
+TOOLS INCLUDED
+• Merge — combine multiple PDFs into a single document, in the order you choose.
+• Split — pull out just the pages you need into a new PDF.
+• Compress — shrink a PDF's file size with an adjustable quality level, so you can see exactly how much space you save.
+• Convert to Images — turn every page of a PDF into a standalone PNG image.
+• OCR Text Extraction — pull readable text out of scanned or image-based PDF pages using on-device text recognition. No page ever leaves your phone to do this.
+
+HOW YOUR FILES ARE HANDLED
+Every tool in PDFGenius processes your documents locally on your device. Imported and created PDFs are kept in a local library on your phone so you can find them again later.
+
+WHAT'S NOT IN YET
+Password protection is on our roadmap but not available in this release — the tool is visible in the app with a clear "Coming Soon" notice rather than a feature that silently does nothing.
+
+PDFGenius is built for people who need quick, reliable PDF utilities without signing up for a service or trusting a stranger's server with their documents.
