@@ -140,7 +140,7 @@ public final class StoreKitManager: ObservableObject {
         return Task.detached {
             for await result in Transaction.updates {
                 do {
-                    let transaction = try self.checkVerified(result)
+                    let transaction = try await self.checkVerified(result)
                     await self.updateSubscriptionStatus()
                     await transaction.finish()
                 } catch {
@@ -163,7 +163,7 @@ public final class StoreKitManager: ObservableObject {
             return nil
         }
 
-        return statuses.first?.state
+        return statuses.first
     }
 
     /// Check if subscription will renew
@@ -172,7 +172,7 @@ public final class StoreKitManager: ObservableObject {
             return false
         }
 
-        switch status {
+        switch status.state {
         case .subscribed:
             return true
         default:
